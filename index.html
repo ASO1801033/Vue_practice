@@ -31,6 +31,16 @@
       </ol>
     </div><br />
 
+    <div id="app-5">
+      app-5 : {{ text }}<br />
+      <button v-on:click="Backtext">app-5 : 文字を反転する！</button>
+    </div><br />
+
+    <div id="app-6">
+      app-6 : 入力欄　" <input v-model="text"> "<br /><!-- 双方向バインディングが簡単に行える v-model ディレクティブ -->
+      app-6 : 表示欄　" {{ text }} "
+    </div>
+
     <script src="index.js"></script>
   </body>
 </html>

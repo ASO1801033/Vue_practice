@@ -33,3 +33,22 @@ var app4 = new Vue({
 });
 
 app4.fruits.push({ name: 'apple ← 追加した果物名なり！' }); //配列にデータを追加
+
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    text: 'しんぶんし　とまと'
+  },
+  methods: {
+    Backtext: function () {
+      this.text = this.text.split('').reverse().join('')
+    }
+  }
+});
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    text: 'Hello World!'
+  }
+});
