@@ -5,9 +5,32 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app">
-      {{ text }}
-    </div>
+    <div id="app-1">
+      app-1 : {{ text }}
+    </div><br />
+
+    <div id="app-2">
+      <!-- v-bind 属性はディレクティブ(特別な属性を示すため v- 接頭辞がついている) -->
+      <span v-bind:title="text">
+        app-2 : 更新前のtextプロパティ<br />
+      </span>
+      app-2 : {{ text }}<!-- 要素の title 属性を Vue インスタンスの text プロパティによって更新して保存 -->
+    </div><br />
+
+    <div id="app-3">
+      <span v-if="seen">app-3 : 表示出来てるよ！</span>
+      <span v-else="seen">app-3 : 表示出来てないよ！！</span>
+    </div><br />
+
+    <div id="app-4">
+      app-4 :
+      <ol>
+        <li v-for="fruit in fruits"><!-- 配列：fruitsの中にある要素：nameを変数：fruitに代入 -->
+          {{ fruit.name }}
+        </li>
+      </ol>
+    </div><br />
+
     <script src="index.js"></script>
   </body>
 </html>
