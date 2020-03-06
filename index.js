@@ -52,3 +52,26 @@ var app6 = new Vue({
     text: 'Hello World!'
   }
 });
+
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    type: '猫'
+  }
+});
+
+new Vue({
+  el: '#app-8',
+  data: {
+    counter: 0
+  },
+  methods: {
+    // v-onディレクティブに指定するメソッドを設定
+    plusEvent: function() {
+      this.counter++;
+    },
+    minusEvent: function() {
+      this.counter--;
+    }
+  }
+});

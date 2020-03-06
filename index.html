@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="app-1">
-      app-1 : {{ text }}
+      app-1 : {{ text }}<!-- {{ }}はマスタッシュ構文 -->
     </div><br />
 
     <div id="app-2">
@@ -39,6 +39,24 @@
     <div id="app-6">
       app-6 : 入力欄　" <input v-model="text"> "<br /><!-- 双方向バインディングが簡単に行える v-model ディレクティブ -->
       app-6 : 表示欄　" {{ text }} "
+    </div><br />
+
+    <div id="app-7">
+      <div v-if="type === '犬'">
+        app-7 : 犬です！
+      </div>
+      <div v-else-if="type === '猫'">
+        app-7 : 猫です！
+      </div>
+      <div v-else>
+        app-7 : その他です！
+      </div>
+    </div><br />
+
+    <div id="app-8">
+      <div class="counter">app-8：カウント数 → {{ counter }}</div>
+      <button v-on:click="plusEvent">+1する！</button>
+      <button v-on:click="minusEvent">-1する！</button>
     </div>
 
     <script src="index.js"></script>
