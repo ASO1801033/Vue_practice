@@ -1,0 +1,32 @@
+</html>
+  <html lang="en">
+  <head>
+    <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>おしながき</title>
+  </head>
+  <body>
+
+    <div id="menu" align="center">
+      <h3>~お品書き~</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:33%;">寿司ネタ</th>
+            <th style="width:34%;">1皿あたり</th>
+            <th style="width:33%;">値段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="neta in osushi">
+            <td style="text-align:center;">{{ neta.name }}</td>
+            <td style="text-align:center;">{{ neta.qty }}貫</td>
+            <td style="text-align:center;">{{ neta.price }}円</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="index_2.js"></script>
+  </body>
+</html>
