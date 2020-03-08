@@ -3,22 +3,44 @@
   <head>
     <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="index_2.css">
     <title>おしながき</title>
   </head>
   <body>
 
     <div id="menu" align="center">
       <h3>~お品書き~</h3>
+
+      <span>値段：</span>
+      <select v-model="selectprice">
+        <option v-for="price in prices" v-bind:value="price">
+          {{ price }}
+        </option>
+      </select> 円<br />
+
+      <span>1皿あたり：</span>
+      <span v-for="qty in qties">
+        <input type="checkbox" v-bind:value="qty" v-model="selectqties">{{ qty }}
+      </span> 貫<br />
+
+      <span>寿司ネタ：</span>
+      <input type="text" v-model="findname" placeholder="検索文字列"><br />
+
+      <span>
+        <button @click="reset">フィルタリングをクリアにする！</button>
+      </span><br /><br />
+
       <table>
         <thead>
           <tr>
-            <th style="width:33%;">寿司ネタ</th>
-            <th style="width:34%;">1皿あたり</th>
-            <th style="width:33%;">値段</th>
+            <th @click="sortBy('name')" :class="sortedClass('name')" style="width:33%;">寿司ネタ</th>
+            <th @click="sortBy('qty')" :class="sortedClass('qty')" style="width:34%;">1皿あたり</th>
+            <th @click="sortBy('price')" :class="sortedClass('price')" style="width:33%;">値段</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="neta in osushi">
+          <!-- <tr v-for="neta in osushi"> -->
+          <tr v-for="neta in eventedAction">
             <td style="text-align:center;">{{ neta.name }}</td>
             <td style="text-align:center;">{{ neta.qty }}貫</td>
             <td style="text-align:center;">{{ neta.price }}円</td>
