@@ -8,8 +8,6 @@
       <title>Single Page Applicationの練習</title>
       <!-- bootstapの読み込み -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-      <link href="" rel="stylesheet">
-
     </head>
 
     <body>
@@ -23,8 +21,8 @@
                 <thead class="bg-info">
                   <tr>
                     <th class="align-middle text-center">ID</th>
-                    <th class="align-middle text-center">NAME</th>
-                    <th class="align-middle text-center">EMAIL</th>
+                    <th class="align-middle text-center">名前</th>
+                    <th class="align-middle text-center">メール</th>
                     <th class="align-middle text-center">更新</th>
                     <th class="align-middle text-center">削除</th>
                   </tr>
@@ -34,8 +32,8 @@
                     <td class="align-middle text-center">{{ user.id }}</td>
                     <td class="align-middle text-center">{{ user.name }}</td>
                     <td class="align-middle text-center">{{ user.email }}</td>
-                    <td class="align-middle text-center"><button class="btn btn-primary">更新</button></td>
-                    <td class="align-middle text-center"><button class="btn btn-danger">削除</button></td>
+                    <td class="align-middle text-center"><button class="btn btn-primary" @click="edit_user(user)">更新</button></td>
+                    <td class="align-middle text-center"><button class="btn btn-danger" @click="delete_user(user)">削除</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -49,7 +47,8 @@
           <div class="card">
             <div class="card-body">
               <div class="card-title">
-                <h2>メンバー登録</h2>
+                <h2 v-if="createFlag">メンバー登録</h2>
+                <h2 v-else>メンバー更新</h2>
               </div>
               <div class="card-text">
                 <div class="form-group">
@@ -64,7 +63,8 @@
                   <label for="id">EMAIL</label>
                   <input type="email" class="form-control" id="email" placeholder="Emailを入力してください" v-model="form.email">
                 </div>
-                <button class="btn btn-primary" @click="add_user">登録</button>
+                <button class="btn btn-primary" @click="add_user" v-if="createFlag">登録</button>
+                <button class="btn btn-primary" @click="update_user" v-else>更新</button>
               </div>
             </div>
           </div>
