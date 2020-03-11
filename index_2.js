@@ -90,7 +90,7 @@ new Vue({
       return this.sort.key === key ? `sorted ${
         this.sort.isAsc ? 'asc' : 'desc' }` : '';
     },
-    //全ての処理をクリアにする
+    //全てのフィルタリング処理をクリアにする
     reset: function() {
       this.sort.key = '';
       this.sort.isAsc = false;
