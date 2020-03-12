@@ -6,6 +6,13 @@ const vue = new Vue({
   data: {
     title: 'メンバー一覧',
     add_title: 'メンバー登録',
+    edit_title: 'メンバー更新',
+    id_text: 'ID',
+    name_text: '名前',
+    mail_text: 'メール',
+    addbutton_text: '登録',
+    editbutton_text: '更新',
+    deletebutton_text: '削除',
     form: {
       id:'',
       name:'',

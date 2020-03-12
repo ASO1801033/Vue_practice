@@ -2,7 +2,7 @@
 
 <li>
  index_1.html / index_1.js<br>
- => ソースの写経
+ => リファレンスの写経
 </li>
 
 <li>

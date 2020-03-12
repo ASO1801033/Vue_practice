@@ -20,11 +20,11 @@
               <table class="table">
                 <thead class="bg-info">
                   <tr>
-                    <th class="align-middle text-center">ID</th>
-                    <th class="align-middle text-center">名前</th>
-                    <th class="align-middle text-center">メール</th>
-                    <th class="align-middle text-center">更新</th>
-                    <th class="align-middle text-center">削除</th>
+                    <th class="align-middle text-center">{{ id_text }}</th>
+                    <th class="align-middle text-center">{{ name_text }}</th>
+                    <th class="align-middle text-center">{{ mail_text }}</th>
+                    <th class="align-middle text-center">{{ editbutton_text }}</th>
+                    <th class="align-middle text-center">{{ deletebutton_text }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,8 @@
                     <td class="align-middle text-center">{{ user.id }}</td>
                     <td class="align-middle text-center">{{ user.name }}</td>
                     <td class="align-middle text-center">{{ user.email }}</td>
-                    <td class="align-middle text-center"><button class="btn btn-primary" @click="edit_user(user)">更新</button></td>
-                    <td class="align-middle text-center"><button class="btn btn-danger" @click="delete_user(user)">削除</button></td>
+                    <td class="align-middle text-center"><button class="btn btn-primary" @click="edit_user(user)">{{ editbutton_text }}</button></td>
+                    <td class="align-middle text-center"><button class="btn btn-danger" @click="delete_user(user)">{{ deletebutton_text }}</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -47,24 +47,24 @@
           <div class="card">
             <div class="card-body">
               <div class="card-title">
-                <h2 v-if="createFlag">メンバー登録</h2>
-                <h2 v-else>メンバー更新</h2>
+                <h2 v-if="createFlag">{{ add_title }}</h2>
+                <h2 v-else>{{ edit_title }}</h2>
               </div>
               <div class="card-text">
                 <div class="form-group">
-                  <label for="id">ID</label>
+                  <label for="id">{{ id_text }}</label>
                   <input type="text" class="form-control" id="id" placeholder="IDを入力してください" v-model="form.id">
                 </div>
                 <div class="form-group">
-                  <label for="name">NAME</label>
-                  <input type="text" class="form-control" id="name" placeholder="NAMEを入力してください" v-model="form.name">
+                  <label for="name">{{ name_text }}</label>
+                  <input type="text" class="form-control" id="name" placeholder="名前を入力してください" v-model="form.name">
                 </div>
                 <div class="form-group">
-                  <label for="id">EMAIL</label>
-                  <input type="email" class="form-control" id="email" placeholder="Emailを入力してください" v-model="form.email">
+                  <label for="id">{{ mail_text }}</label>
+                  <input type="email" class="form-control" id="email" placeholder="メールを入力してください" v-model="form.email">
                 </div>
-                <button class="btn btn-primary" @click="add_user" v-if="createFlag">登録</button>
-                <button class="btn btn-primary" @click="update_user" v-else>更新</button>
+                <button class="btn btn-primary" @click="add_user" v-if="createFlag">{{ addbutton_text }}</button>
+                <button class="btn btn-primary" @click="update_user" v-else>{{ editbutton_text }}</button>
               </div>
             </div>
           </div>
