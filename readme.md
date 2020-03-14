@@ -7,7 +7,7 @@
 
 <li>
  index_2.html / index_2.js / index_2.css<br>
- => 配列要素の表示 & フィルタリングとソート機能実装
+ => 配列要素の表示 & フィルタリングとソート機能実装の練習
 </li>
 
 <li>
@@ -18,4 +18,9 @@
 <li>
  index_4.html / index_4.js / index_4.css<br>
  => チャット機能実装の練習
+</li>
+
+<li>
+ index_5.html / index_5.js<br>
+ => SPAでタスク管理ページ作成の練習
 </li>
