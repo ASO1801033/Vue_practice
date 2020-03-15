@@ -1,0 +1,59 @@
+body {
+  padding: 20px;
+  font: 16px/1.4 sans-serif;
+}
+.button1 {
+  font-size: 1rem;
+  background: none;
+  color: #f66;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.button1 span {
+  font-size: 2.25rem;
+  position: relative;
+  top: 5px;
+}
+.button1:hover {
+  color: #d44;
+}
+.panel1 {
+  background: #fee;
+  border: 2px solid #fbb;
+  padding: 20px;
+  text-align: center;
+}
+.button2 {
+  font-size: 1.25rem;
+  padding: 10px;
+  background: #0bd;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.button2:hover {
+  color: #0090aa;
+}
+.panel2 {
+  background: #eee;
+  padding: 18px;
+  transform-origin: 0 0;
+}
+textarea {
+  width: 50%;
+  height: 80px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* Animation */
+.slide-enter-active, .slide-leave-active {
+  transition: .5s;
+}
+.slide-enter, .slide-leave-to {
+  transform: scaleY(0);
+}

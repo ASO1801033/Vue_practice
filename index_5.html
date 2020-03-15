@@ -3,94 +3,42 @@
     <head>
       <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-      <!-- vue-js-modalはCNDを利用 -->
-      <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
-      <!-- bootstapの読み込み -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <!-- CSSの読み込み -->
+      <link rel="stylesheet" type="text/css" href="index_5.css">
       <title>練習</title>
     </head>
 
     <body>
-      <div id="app">
-        <div class="container mt-5">
-
-          <div class="row">
-            <div class="col-6 bg-primary">
-              <h2 class="mt-1">{{ title }}</h2>
-            </div>
-            <div class="col-6 bg-danger text-right">
-              <button class="btn btn-success mt-1" @click="showModal">{{ add_title }}</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-
-              <table class="table">
-                <thead class="bg-info">
-                  <tr>
-                    <th class="align-middle text-center">{{ id_text }}</th>
-                    <th class="align-middle text-center">{{ name_text }}</th>
-                    <th class="align-middle text-center">{{ detail_text }}</th>
-                    <th class="align-middle text-center">{{ editbutton_text }}</th>
-                    <th class="align-middle text-center">{{ deletebutton_text }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="task in tasks" v-bind:key="task.id">
-                    <td class="align-middle text-center">{{ task.id }}</td>
-                    <td class="align-middle text-center">{{ task.name }}</td>
-                    <td class="align-middle text-center">{{ task.detail }}</td>
-                    <td class="align-middle text-center"><button class="btn btn-primary" @click="edit_task(task)">{{ editbutton_text }}</button></td>
-                    <td class="align-middle text-center"><button class="btn btn-danger" @click="delete_task(task)">{{ deletebutton_text }}</button></td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- ↓タスク追加orタスク更新ボタンを押した時のモーダル -->
-        <modal name="task-modal" :height="380" width=90%>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title">
-                <h3 v-if="createFlag">{{ add_title }}</h3>
-                <h3 v-else>{{ edit_title }}</h3>
-              </div>
-              <div class="card-text">
-                <div class="form-group">
-                  <label for="id">{{ id_text }}</label>
-                  <input type="text" class="form-control" id="id" placeholder="IDを入力してください" v-model="form.id">
-                </div>
-                <div class="form-group">
-                  <label for="name">{{ name_text }}</label>
-                  <input type="text" class="form-control" id="name" placeholder="タスク名を入力してください" v-model="form.name">
-                </div>
-                <div class="form-group">
-                  <label for="detail">{{ detail_text }}</label>
-                  <input type="text" class="form-control" id="detail" placeholder="内容を入力してください" v-model="form.detail">
-                </div>
-                <button class="btn btn-success" @click="add_task" v-if="createFlag">{{ addbutton_text }}</button>
-                <button class="btn btn-primary" @click="update_task" v-else>{{ editbutton_text }}</button>
-              </div>
-            </div>
-          </div>
-        </modal>
-        <!-- ↑タスク追加orタスク更新ボタンを押した時のモーダル -->
-
+      <!-- ↓ボタンを押すとdiv全体の内容を消す -->
+      <div id="app1" v-if="show" class="panel1">
+        <p>エラーメッセージです！</p>
+        <button v-on:click="show = !show" class="button1"><span>&times;</span>とじる</button>
       </div>
+      <!-- ↑ボタンを押すとdiv全体の内容を消す -->
+
+      <br />
+
+      <!-- ↓ボタンを押すと内容の表示・非表示を切り替える(スライドパネル) -->
+      <div id="app2">
+        <button v-on:click="show = !show" class="button2">{{ label }}</button>
+        <transition name="slide"><!-- transitionタグで動きをつける -->
+          <div v-if="show" class="panel2"><!-- showがtrueの時 -->
+            <p>jgiroehjiao:r@ngkrue0@t4093yteorhaioy3girpe:hgpdeusip:hwy5ip4wjipjgrip:ej</p>
+          </div>
+        </transition>
+      </div>
+      <!-- ↑ボタンを押すと内容の表示・非表示を切り替える(スライドパネル) -->
+
+      <br />
+
+      <!-- ↓文字数のカウント -->
+      <div id="app3">
+        <textarea v-model.trim="text"></textarea><!-- trimを使うと空白を文字としてカウントしない -->
+        <p>あと {{ max - text.length }} 字入力できるよ！</p><!-- lengthで文字数を数える -->
+      </div>
+      <!-- ↑文字数のカウント -->
+
       <script src="index_5.js"></script>
     </body>
   </html>
 </html>
-
-
-<!--
-  ★SPAを使ってタスク管理ページを作成する
-  機能1：タスクの追加
-  機能2：タスク内容の編集
-  機能3：タスクの削除
-  機能4：タスク完了の分岐
--->

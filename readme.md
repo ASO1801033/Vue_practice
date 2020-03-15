@@ -21,6 +21,6 @@
 </li>
 
 <li>
- index_5.html / index_5.js<br>
- => SPAでタスク管理ページ作成の練習
+ index_5.html / index_5.js / index_5.css<br>
+ => 作成中
 </li>
