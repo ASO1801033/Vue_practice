@@ -21,6 +21,6 @@ new Vue({
   el: "#app3",
   data: {
     text: '',
-    max: 20
+    max: 20,
   }
 });

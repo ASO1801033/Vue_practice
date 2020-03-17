@@ -3,6 +3,8 @@
     <head>
       <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <!-- bootstapの読み込み -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <!-- CSSの読み込み -->
       <link rel="stylesheet" type="text/css" href="index_5.css">
       <title>練習</title>
@@ -23,7 +25,11 @@
         <button v-on:click="show = !show" class="button2">{{ label }}</button>
         <transition name="slide"><!-- transitionタグで動きをつける -->
           <div v-if="show" class="panel2"><!-- showがtrueの時 -->
-            <p>jgiroehjiao:r@ngkrue0@t4093yteorhaioy3girpe:hgpdeusip:hwy5ip4wjipjgrip:ej</p>
+            <p>
+              しりとり→りんご→ごま→まくら→らすく→くるま→まぐろ→ろーすとびーふ→ふらんくふると→とけい→いちご→ごみぶくろ
+              →ろうそく→くま→まりも→もぐら→らんどせる→るーれっと→とまと→とるこ→こども→もるもっと→とり→りすとばんど
+              →どんぐり→りか→からす→するめ→めっせーじ→じこくひょう→うさぎ→ぎじゅつ→つくし→しんかんせん
+            </p>
           </div>
         </transition>
       </div>
@@ -34,7 +40,9 @@
       <!-- ↓文字数のカウント -->
       <div id="app3">
         <textarea v-model.trim="text"></textarea><!-- trimを使うと空白を文字としてカウントしない -->
-        <p>あと {{ max - text.length }} 字入力できるよ！</p><!-- lengthで文字数を数える -->
+        <p v-if="max - text.length > 0" class="text-success"><big>あと {{ max - text.length }} 文字入力できるよ！</big></p><!-- lengthで文字数を数える -->
+        <p v-else-if="max - text.length === 0" class="text-primary"><big>{{ max }} 文字ぴったり入力しています！</big></p><!-- lengthで文字数を数える -->
+        <p v-else class="text-danger"><big>{{text.length - max }} 文字オーバーしています！！</big></p><!-- lengthで文字数を数える -->
       </div>
       <!-- ↑文字数のカウント -->
 
