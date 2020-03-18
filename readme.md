@@ -22,5 +22,10 @@
 
 <li>
  index_5.html / index_5.js / index_5.css<br>
- => 作成中
+ => divタグ内の中身を非表示にする & ボタン押下で中身の表示・非表示を切り替える & 入力文字数のカウント機能実装の練習
+</li>
+
+<li>
+ index_6.html / index_6.js<br>
+ => methodsオプションの練習
 </li>
