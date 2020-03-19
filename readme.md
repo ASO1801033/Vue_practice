@@ -1,5 +1,6 @@
 <h2>Vueの練習をするリポジトリ</h2>
 
+<!--
 <li>
  index_1.html / index_1.js<br>
  => リファレンスの写経
@@ -29,3 +30,4 @@
  index_6.html / index_6.js<br>
  => methodsオプションの練習
 </li>
+-->

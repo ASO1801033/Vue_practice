@@ -1,0 +1,35 @@
+<html>
+  <html lang="en">
+    <head>
+      <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <!-- vue-js-modalはCNDを利用 -->
+      <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
+      <!-- bootstapの読み込み -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <!-- CSSの読み込み -->
+      <!-- <link rel="stylesheet" type="text/css" href="index_7.css"> -->
+      <title>練習3</title>
+    </head>
+
+    <body class="m-3">
+
+      <div id="app-1">
+        <h1 v-if="hello_text">Hello!!!</h1>
+        <h1 v-else>Oh...</h1>
+        <template v-if="ok1">
+          <h1>Title</h1>
+          <p>Paragraph 1</p>
+          <p>Paragraph 2</p>
+        </template>
+        <h1 v-show="ok2">Hello!</h1>
+        <!--
+        ・頻繁に何かを切り替える必要があればv-show、条件が実行時に変更することがほとんどない場合は、v-ifをつかう
+        ・v-ifと v-forを同時に使うことは推奨されない
+      -->
+      </div>
+
+      <script src="index_7.js"></script>
+    </body>
+  </html>
+</html>
