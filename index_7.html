@@ -29,6 +29,15 @@
       -->
       </div>
 
+      <div id="app-2">
+        <ul>
+          <!-- key属性として要素を一意に識別できる値をバインドする -->
+          <li v-for="fruit in fruits" :key="name"><!-- 配列：fruitsの中にある要素：nameを変数：fruitに代入 -->
+            {{ fruit.name }}
+          </li>
+        </ul>
+      </div>
+
       <script src="index_7.js"></script>
     </body>
   </html>
