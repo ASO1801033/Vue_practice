@@ -34,14 +34,37 @@
           <label :for="item.id" class="mr-3">" {{ item.text }} "を表示</label>
         </span>
 
+        <!--
         <ul class="task-list">
           <li v-if="showTasks.length <= 0">タスクはありません</li>
           <li v-for="(task, index) in showTasks" :key="index" class="mb-2">
-            <span :class="{'line-through':task.done}" class="align-middle">{{ task.task }}</span>
-            <input type="checkbox" v-model="task.done">
-            <button type="button" class="btn btn-primary btn-sm" v-on:click="del(index)">削除する</button>
+          <span :class="{'line-through':task.done}" class="align-middle">{{ task.task }}</span>
+          <input type="checkbox" v-model="task.done">
+          <button type="button" class="btn btn-primary btn-sm" v-on:click="del(index)">削除する</button>
           </li>
         </ul>
+        -->
+
+        <div v-if="showTasks.length <= 0">タスクはありません</div>
+        <!-- <div class="task-list"> -->
+        <div v-else="task-list">
+          <table class="table">
+            <thead class="bg-info">
+              <tr>
+                <th class="align-middle text-center bg-danger">タスク名</th>
+                <th class="align-middle text-center bg-warning">進捗更新</th>
+                <th class="align-middle text-center bg-primary">削除</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(task, index) in showTasks" :key="index">
+                <td :class="{'line-through':task.done}" class="align-middle text-center">{{ task.task }}</td>
+                <td class="align-middle text-center"><input type="checkbox" v-model="task.done"></td>
+                <td class="align-middle text-center"><button type="button" class="btn btn-primary btn-sm" v-on:click="del(index)">削除する</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <script src="index_9.js"></script>

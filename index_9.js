@@ -19,9 +19,8 @@ const app = new Vue({
       this.value = '';
     },
     del(index) { //タスクの削除
-      if(confirm('削除しますか？')) {
-        this.task.splice(index, 1); //index番目から1要素を削除する
-      }
+      //console.log(index);
+      this.tasks.splice(index, 1); //spliceメソッドを使ってindex番目の要素1つを配列から削除
     },
   },
   computed: { //条件によって表示したい配列をフィルタリングする時は算出プロパティをつかう
