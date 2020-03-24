@@ -59,7 +59,7 @@
             <tbody>
               <tr v-for="(task, index) in showTasks" :key="index">
                 <td :class="{'line-through':task.done}" class="align-middle text-center">{{ task.task }}</td>
-                <td class="align-middle text-center"><input type="checkbox" v-model="task.done"></td>
+                <!-- <td class="align-middle text-center"><input type="checkbox" v-model="task.done"></td> -->
                 <td class="align-middle text-center"><button type="button" class="btn btn-primary btn-sm" v-on:click="del(index)">削除する</button></td>
               </tr>
             </tbody>
