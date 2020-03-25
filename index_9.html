@@ -52,7 +52,7 @@
             <thead class="bg-info">
               <tr>
                 <th class="align-middle text-center bg-danger">タスク名</th>
-                <th class="align-middle text-center bg-warning">進捗更新</th>
+                <th class="align-middle text-center bg-warning">進捗状況</th>
                 <th class="align-middle text-center bg-primary">削除</th>
               </tr>
             </thead>
@@ -60,6 +60,8 @@
               <tr v-for="(task, index) in showTasks" :key="index">
                 <td :class="{'line-through':task.done}" class="align-middle text-center">{{ task.task }}</td>
                 <!-- <td class="align-middle text-center"><input type="checkbox" v-model="task.done"></td> -->
+                <td v-if="task.done === false" class="text-center"><input type="checkbox" v-model="task.done">未完了</td>
+                <td v-if="task.done != false" class="text-center"><input type="checkbox" v-model="task.done">完了</td>
                 <td class="align-middle text-center"><button type="button" class="btn btn-primary btn-sm" v-on:click="del(index)">削除する</button></td>
               </tr>
             </tbody>
