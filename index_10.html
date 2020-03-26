@@ -1,0 +1,70 @@
+<!-- 就活の企業管理SPAを作る -->
+<!--
+機能1：企業名が入力できる
+機能2：エントリー開始日が入力できる
+機能3：エントリー終了日が入力できる
+機能4：インターン開始日が入力できる
+機能5：インターン終了日が入力できる
+機能6：ホームページのURLが入力できる
+機能7：自分の進捗が入力できる
+-->
+<!--
+必要なデータ要素
+・ID
+・企業名
+・エントリー開始日
+・エントリー終了日
+・インターン開始日
+・インターン終了日
+・ホームページ
+・自分の進捗
+-->
+
+<html>
+  <html lang="en">
+    <head>
+      <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <!-- vue-js-modalはCNDを利用 -->
+      <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
+      <title>練習</title>
+      <!-- bootstapの読み込み -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+
+    <body>
+      <div id="app">
+        <button class="btn btn-primary" v-on:click="Modal_show">ついか</button>
+
+        <!-- ↓メンバー登録ボタンを押した時のモーダル -->
+        <modal name="add-modal" :height="400">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">
+                <!--
+                <h2 v-if="createFlag">ついか</h2>
+                <h2 v-else>へんこう</h2>
+                -->
+                <h2>ついか</h2>
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <label for="name">企業名</label>
+                  <input type="text" class="form-control" id="name" placeholder="企業名を入力してください" v-model="form.name">
+                </div>
+                <!--
+                <button class="btn btn-primary" @click="add_user" v-if="createFlag">ついか</button>
+                <button class="btn btn-primary" @click="update_user" v-else>へんこう</button>
+                -->
+                <button class="btn btn-primary">ついか</button>
+              </div>
+            </div>
+          </div>
+        </modal>
+        <!-- ↑メンバー登録ボタンを押した時のモーダル -->
+
+      </div>
+      <script src="index_10.js"></script>
+    </body>
+  </html>
+</html>

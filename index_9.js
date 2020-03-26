@@ -19,7 +19,7 @@ const app = new Vue({
       this.value = '';
     },
     del(index) { //タスクの削除
-      console.log(tasks[index]);
+      console.log(tasks(index));
       this.tasks.splice(index, 1); //spliceメソッドを使ってindex番目の要素1つを配列から削除
     },
   },
