@@ -21,6 +21,22 @@
 ・自分の進捗
 */
 
+/*
+var STORAGE_KEY = 'offices'
+var officeStorage = {
+fetch: function () {
+  var offices = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+  offices.forEach(function (todo, index) {
+    todo.id = index
+  })
+  officeStorage.uid = offices.length
+  return offices
+},
+  save: function (offices) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(offices))
+  }
+*/
+
 //vue-js-modalを使うためにVue.useを設定
 Vue.use(window["vue-js-modal"].default);
 
@@ -29,7 +45,19 @@ const vue = new Vue({
   data: {
     form: {
       name:'',
+      entry_start:'',
+      entry_end:'',
+      intern_start:'',
+      intern_end:'',
+      //state:'',
     },
+    state_select: '',
+    states: [
+        { id: 1, state: 'ES作成中' },
+        { id: 2, state: 'エントリー済み' },
+        { id: 3, state: 'インターン参加決定' },
+        { id: 4, state: 'インターン参加済み' },
+    ],
 
     offices: [],
     //editIndex: -1, //update_userで使う
@@ -50,13 +78,14 @@ const vue = new Vue({
       //this.createFlag = true;
       this.resetForm();
       this.$modal.show('add-modal');
-    },/*
-    add_user(){ //メンバー登録
-      const user = Object.assign({},this.form); //入力した値からuserオブジェクトを作成
-      this.users.push(user); //配列のpushメソッドを使って配列usersの一番後ろに作成したuserオブジェクトを追加
-      this.$modal.hide('user-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
-      this.resetForm(); //resetFormの呼び出し
     },
+    add_office(){ //メンバー登録
+      const add_data = Object.assign({},this.form); //入力した値からuserオブジェクトを作成
+      this.offices.push(add_data); //配列のpushメソッドを使って配列usersの一番後ろに作成したuserオブジェクトを追加
+      console.log(add_data);
+      this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
+      this.resetForm(); //resetFormの呼び出し
+    },/*
     delete_user(user){ //メンバー削除
       const index = this.users.indexOf(user); //indexOfメソッドを使って削除を行ったメンバーの配列の番号を取得
       this.users.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
@@ -73,6 +102,10 @@ const vue = new Vue({
     },*/
     resetForm(){ //モーダル内の入力値をリセット
       this.form.name = ''
+      this.entry_start = ''
+      this.entry_end = ''
+      this.intern_start = ''
+      this.intern_end = ''
     },
   },
 });
