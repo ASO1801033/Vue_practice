@@ -60,8 +60,8 @@ const vue = new Vue({
     ],
 
     offices: [],
-    //editIndex: -1, //update_userで使う
-    //createFlag: true, //モーダルのボタン切り替え
+    editIndex: -1, //update_userで使う
+    createFlag: true, //モーダルのボタン切り替え
 
   },/*
   created(){
@@ -75,37 +75,37 @@ const vue = new Vue({
   },*/
   methods: {
     Modal_show(){ //モーダルを表示
-      //this.createFlag = true;
+      this.createFlag = true;
       this.resetForm();
       this.$modal.show('add-modal');
     },
     add_office(){ //メンバー登録
       const add_data = Object.assign({},this.form); //入力した値からuserオブジェクトを作成
       this.offices.push(add_data); //配列のpushメソッドを使って配列usersの一番後ろに作成したuserオブジェクトを追加
-      console.log(add_data);
+      //console.log(add_data);
       this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
       this.resetForm(); //resetFormの呼び出し
     },/*
     delete_user(user){ //メンバー削除
       const index = this.users.indexOf(user); //indexOfメソッドを使って削除を行ったメンバーの配列の番号を取得
       this.users.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
-    },
-    edit_user(user){ //メンバー更新
-      this.createFlag = false,
-      this.editIndex = this.users.indexOf(user);
-      this.form = Object.assign({}, user);
-      this.$modal.show('user-modal');
-    },
-    update_user(){ //モーダルウィンドウ上で行ったユーザ情報の更新を保存
-      Object.assign(this.users[this.editIndex], this.form);
-      this.$modal.hide('user-modal');
     },*/
+    edit_office(office){ //メンバー更新
+      this.createFlag = false,
+      this.editIndex = this.offices.indexOf(office);
+      this.form = Object.assign({}, office);
+      this.$modal.show('add-modal');
+    },
+    update_office(){ //モーダルウィンドウ上で行ったユーザ情報の更新を保存
+      Object.assign(this.offices[this.editIndex], this.form);
+      this.$modal.hide('add-modal');
+    },
     resetForm(){ //モーダル内の入力値をリセット
       this.form.name = ''
-      this.entry_start = ''
-      this.entry_end = ''
-      this.intern_start = ''
-      this.intern_end = ''
+      this.form.entry_start = ''
+      this.form.entry_end = ''
+      this.form.intern_start = ''
+      this.form.intern_end = ''
     },
   },
 });
