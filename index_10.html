@@ -1,25 +1,3 @@
-<!-- 就活の企業管理SPAを作る -->
-<!--
-機能1：企業名が入力できる
-機能2：エントリー開始日が入力できる
-機能3：エントリー終了日が入力できる
-機能4：インターン開始日が入力できる
-機能5：インターン終了日が入力できる
-機能6：ホームページのURLが入力できる
-機能7：自分の進捗が入力できる
--->
-<!--
-必要なデータ要素
-・ID
-・企業名
-・エントリー開始日
-・エントリー終了日
-・インターン開始日
-・インターン終了日
-・ホームページ
-・自分の進捗
--->
-
 <html>
   <html lang="en">
     <head>
@@ -33,41 +11,46 @@
     </head>
 
     <body>
-      <div id="app">
-        <button class="btn btn-primary" v-on:click="Modal_show">ついか</button>
+      <div id="app" class="m-3">
+        <div class="text-right">
+          <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">ついか</button>
+        </div>
 
-        <table class="table">
-          <thead class="bg-info">
-            <tr>
-              <th class="align-middle text-center bg-danger">企業名</th>
-              <th class="align-middle text-center bg-warning">エントリー期日</th>
-              <!-- <th class="align-middle text-center bg-primary">エントリー<br>終了日</th> -->
-              <th class="align-middle text-center bg-danger">インターン期日</th>
-              <!-- <th class="align-middle text-center bg-warning">インターン<br>終了日</th> -->
-              <th class="align-middle text-center bg-warning">更新</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="office in offices" v-bind:key="office.id">
-              <td class="align-middle text-center">{{ office.name }}</td>
-              <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
-              <!-- <td class="align-middle text-center">{{ office.entry_end }}</td> -->
-              <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
-              <!-- <td class="align-middle text-center">{{ office.intern_end }}</td> -->
-              <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">そうさ</button></td>
-            </tr>
-          </tbody>
-        </table>
+        <div v-if="offices.length == 0" class="text-center">
+          <h4>ついかしている企業はありません<br>ついかしてみましょう！</h4>
+        </div>
 
-        <!-- ↓メンバー登録ボタンを押した時のモーダル -->
-        <modal name="add-modal" :height="500">
+        <div v-else>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="align-middle text-center">企業名</th>
+                <th class="align-middle text-center">エントリー期日</th>
+                <th class="align-middle text-center">インターン期日</th>
+                <th class="align-middle text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="office in offices">
+                <td class="align-middle text-center">{{ office.name }}</td>
+                <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
+                <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
+                <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">そうさ</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- ↓ついかボタンを押した時のモーダル -->
+        <modal name="add-modal" :height="380">
           <div class="card">
             <div class="card-body">
               <div class="card-title">
                 <h3 v-if="createFlag">ついか</h3>
                 <h3 v-else>そうさ</h3>
-                <!-- <h3>ついか</h3> -->
               </div>
+
               <div class="card-text">
                 <div class="form-group">
                   <label for="name">企業名</label>
@@ -106,25 +89,9 @@
                   </div>
                 </div>
 
-                <!--<div class="form-group">
-                  <label for="state">現在の進捗</label>
-                  <input type="text" class="form-control" id="state" v-model="form.state">
-                  <select v-model="state_select" class="form-control" id="state" v-model="form.state">
-                    <option disabled value="">進捗を選択して下さい</option>
-                    <option v-for="option in states" v-bind:value="option.state" v-bind:key="option.id">
-                        {{ option.state }}
-                    </option>
-                  </select>
-                </div>-->
-
-                <!--
-                <button class="btn btn-primary" @click="add_user" v-if="createFlag">ついか</button>
-                <button class="btn btn-primary" @click="update_user" v-else>へんこう</button>
-                -->
                 <button class="btn btn-primary" v-on:click="add_office" v-if="createFlag">ついか</button>
                 <div v-else>
-                  <!-- <button class="btn btn-primary" v-on:click="update_office" v-else>へんこう</button> -->
-                  <button class="btn btn-danger">さくじょ</button>
+                  <button class="btn btn-danger" v-on:click="delete_office(office)">さくじょ</button>
                   <button class="btn btn-primary" v-on:click="update_office">へんこう</button>
                 </div>
 
@@ -132,7 +99,7 @@
             </div>
           </div>
         </modal>
-        <!-- ↑メンバー登録ボタンを押した時のモーダル -->
+        <!-- ↑ついかボタンを押した時のモーダル -->
 
       </div>
       <script src="index_10.js"></script>
