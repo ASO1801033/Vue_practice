@@ -5,17 +5,17 @@ const vue = new Vue({
   el:"#app",
   data: {
     form: {
-      name:'',
-      entry_start:'',
-      entry_end:'',
-      intern_start:'',
-      intern_end:'',
+      name: '',
+      entry_start: '',
+      entry_end: '',
+      intern_start: '',
+      intern_end: '',
+      state: '',
     },
 
     offices: [],
     editIndex: -1, //update_officeで使う
     createFlag: true, //モーダルのボタン切り替え
-
   },
   // ↓ローカルストレージの実装
   watch: {
@@ -43,7 +43,7 @@ const vue = new Vue({
     add_office(){ //メンバー登録
       const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
       this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
-      //console.log(add_data);
+      console.log(add_data);
       this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
       this.resetForm(); //resetFormの呼び出し
     },
@@ -68,6 +68,7 @@ const vue = new Vue({
       this.form.entry_end = '';
       this.form.intern_start = '';
       this.form.intern_end = '';
+      this.form.state = '';
     },
   },
 });

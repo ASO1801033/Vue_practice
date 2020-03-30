@@ -13,11 +13,11 @@
     <body>
       <div id="app" class="m-3">
         <div class="text-right">
-          <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">ついか</button>
+          <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
 
         <div v-if="offices.length == 0" class="text-center">
-          <h4>ついかしている企業はありません<br>ついかしてみましょう！</h4>
+          <h4>追加している企業はありません<br>追加してみましょう！</h4>
         </div>
 
         <div v-else>
@@ -27,6 +27,7 @@
                 <th class="align-middle text-center">企業名</th>
                 <th class="align-middle text-center">エントリー期日</th>
                 <th class="align-middle text-center">インターン期日</th>
+                <th class="align-middle text-center">進捗</th>
                 <th class="align-middle text-center">操作</th>
               </tr>
             </thead>
@@ -35,7 +36,8 @@
                 <td class="align-middle text-center">{{ office.name }}</td>
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
-                <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">そうさ</button></td>
+                <td class="align-middle text-center">{{ office.state }}</td>
+                <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">操作</button></td>
               </tr>
             </tbody>
           </table>
@@ -43,12 +45,12 @@
 
 
         <!-- ↓ついかボタンを押した時のモーダル -->
-        <modal name="add-modal" :height="380">
+        <modal name="add-modal" :height="470">
           <div class="card">
             <div class="card-body">
               <div class="card-title">
-                <h3 v-if="createFlag">ついか</h3>
-                <h3 v-else>そうさ</h3>
+                <h3 v-if="createFlag">追加</h3>
+                <h3 v-else>操作</h3>
               </div>
 
               <div class="card-text">
@@ -89,10 +91,20 @@
                   </div>
                 </div>
 
-                <button class="btn btn-primary" v-on:click="add_office" v-if="createFlag">ついか</button>
+                <div class="form-group">
+                  <label for="state">進捗状況</label>
+                  <select class="form-control" id="state" v-model="form.state">
+                    <option>ES作成中</option>
+                    <option>エントリー済</option>
+                    <option>インターン参加決定</option>
+                    <option>インターン参加済</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-primary" v-on:click="add_office" v-if="createFlag">追加</button>
                 <div v-else>
-                  <button class="btn btn-danger" v-on:click="delete_office(office)">さくじょ</button>
-                  <button class="btn btn-primary" v-on:click="update_office">へんこう</button>
+                  <button class="btn btn-danger" v-on:click="delete_office(office)">削除</button>
+                  <button class="btn btn-primary" v-on:click="update_office">変更</button>
                 </div>
 
               </div>
