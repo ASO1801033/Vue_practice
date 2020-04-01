@@ -40,12 +40,35 @@ const vue = new Vue({
       this.resetForm();
       this.$modal.show('add-modal');
     },
-    add_office(){ //メンバー登録
+    add_office(){ //登録
+      /*
+      var e_start = moment(this.form.entry_start, "YYYY-MM-DD");
+      var e_end = moment(this.form.entry_end, "YYYY-MM-DD");
+      */
+
+      var text1;
+      if(moment(this.form.entry_start).isSameOrBefore(this.form.entry_end)) {
+        text1 = "エントリー開始日は終了日と同じ日または前の日付です";
+      }else {
+        text1 = "エントリー開始日は終了日より後の日付です";
+      }
+      console.log(text1);
+
+      var text2;
+      if(moment(this.form.intern_start).isSameOrBefore(this.form.intern_end)) {
+        text2 = "インターン開始日は終了日と同じ日または前の日付です";
+      }else {
+        text2 = "インターン開始日は終了日より後の日付です";
+      }
+      console.log(text2);
+
+      /*
       const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
       this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
       console.log(add_data);
       this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
       this.resetForm(); //resetFormの呼び出し
+      */
     },
     delete_office(office){ //削除
       const index = this.offices.indexOf(office); //indexOfメソッドを使って削除を行った配列の番号を取得
