@@ -10,6 +10,8 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <!-- moment.js -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+      <!-- vue-swal -->
+      <script src="https://unpkg.com/vue-swal"></script>
     </head>
 
     <body>
@@ -96,6 +98,7 @@
                 <div class="form-group">
                   <label for="state">進捗状況</label>
                   <select class="form-control" id="state" v-model="form.state">
+                    <option>検討中</option>
                     <option>ES作成中</option>
                     <option>エントリー済</option>
                     <option>インターン参加決定</option>

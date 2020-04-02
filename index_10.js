@@ -12,7 +12,6 @@ const vue = new Vue({
       intern_end: '',
       state: '',
     },
-
     offices: [],
     editIndex: -1, //update_officeで使う
     createFlag: true, //モーダルのボタン切り替え
@@ -41,34 +40,56 @@ const vue = new Vue({
       this.$modal.show('add-modal');
     },
     add_office(){ //登録
-      /*
-      var e_start = moment(this.form.entry_start, "YYYY-MM-DD");
-      var e_end = moment(this.form.entry_end, "YYYY-MM-DD");
-      */
-
-      var text1;
-      if(moment(this.form.entry_start).isSameOrBefore(this.form.entry_end)) {
-        text1 = "エントリー開始日は終了日と同じ日または前の日付です";
-      }else {
-        text1 = "エントリー開始日は終了日より後の日付です";
+      var error = '';
+      if(!this.form.name) {
+        error += '企業名が未入力です！\n';
       }
-      console.log(text1);
 
-      var text2;
-      if(moment(this.form.intern_start).isSameOrBefore(this.form.intern_end)) {
-        text2 = "インターン開始日は終了日と同じ日または前の日付です";
+      if(this.form.entry_start && this.form.entry_end) {
+        if(!(moment(this.form.entry_start).isSameOrBefore(this.form.entry_end))) {
+         error += 'エントリー終了日はエントリー開始日以降に設定してください！\n';
+        }
       }else {
-        text2 = "インターン開始日は終了日より後の日付です";
+        if(!this.form.entry_start) {
+          error += 'エントリー開始日が未入力です！\n';
+        }
+        if(!this.form.entry_end) {
+          error += 'エントリー終了日が未入力です！\n';
+        }
       }
-      console.log(text2);
 
-      /*
-      const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
-      this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
-      console.log(add_data);
-      this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
-      this.resetForm(); //resetFormの呼び出し
-      */
+      if(this.form.intern_start && this.form.intern_end) {
+        if(!(moment(this.form.intern_start).isSameOrBefore(this.form.intern_end))) {
+         error += 'インターン終了日はインターン開始日以降に設定してください！\n';
+        }
+      }else {
+        if(!this.form.intern_start) {
+          error += 'インターン開始日が未入力です！\n';
+        }
+        if(!this.form.intern_end) {
+          error += 'インターン終了日が未入力です！\n';
+        }
+      }
+
+      if(this.form.entry_end && this.form.intern_start) {
+        if(!(moment(this.form.entry_end).isSameOrBefore(this.form.intern_start))) {
+         error += 'インターン開始日はエントリー終了日以降に設定してください！\n';
+        }
+      }
+
+      if(!this.form.state) {
+        error += '進捗が未入力です！\n';
+      }
+
+      if(error) {
+        this.$swal(error); //エラーメッセージがあれば表示
+      }else { //エラーメッセージがなければ登録
+        const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
+        this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+        console.log(add_data);
+        this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
+        this.resetForm(); //resetFormの呼び出し
+      }
     },
     delete_office(office){ //削除
       const index = this.offices.indexOf(office); //indexOfメソッドを使って削除を行った配列の番号を取得
