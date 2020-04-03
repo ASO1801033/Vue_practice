@@ -5,17 +5,18 @@
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
       <!-- vue-js-modalはCNDを利用 -->
       <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
-      <title>練習</title>
+      <title>インターン向け企業情報管理SPA</title>
       <!-- bootstapの読み込み -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <!-- moment.js -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-      <!-- vue-swal -->
+      <!-- vue-swal(アラートのライブラリ) -->
       <script src="https://unpkg.com/vue-swal"></script>
     </head>
 
     <body>
       <div id="app" class="m-3">
+        <h3 class="text-center">〜インターン向け企業情報管理リスト〜</h3>
         <div class="text-right">
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
@@ -60,7 +61,7 @@
               <div class="card-text">
                 <div class="form-group">
                   <label for="name">企業名</label>
-                  <input type="text" class="form-control" id="name" placeholder="企業名を入力してください" v-model="form.name">
+                  <input type="text" class="form-control" id="name" placeholder="企業名を入力してください" v-model.trim="form.name">
                 </div>
 
                 <div class="row">
@@ -106,7 +107,7 @@
                   </select>
                 </div>
 
-                <button class="btn btn-primary" v-on:click="add_office" v-if="createFlag">追加</button>
+                <button class="btn btn-primary" id="add_button" v-on:click="add_office" v-if="createFlag">追加</button>
                 <div v-else>
                   <button class="btn btn-danger" v-on:click="delete_office(office)">削除</button>
                   <button class="btn btn-primary" v-on:click="update_office">変更</button>

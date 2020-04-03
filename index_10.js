@@ -40,7 +40,36 @@ const vue = new Vue({
       this.$modal.show('add-modal');
     },
     add_office(){ //登録
+        /*
+        const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
+        this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+        console.log(add_data);
+        this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
+        this.resetForm(); //resetFormの呼び出し
+        */
+        this.input_chack();
+    },
+    delete_office(office){ //削除
+      const index = this.offices.indexOf(office); //indexOfメソッドを使って削除を行った配列の番号を取得
+      this.offices.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
+      this.$modal.hide('add-modal');
+    },
+    edit_office(office){ //更新
+      this.createFlag = false,
+      this.editIndex = this.offices.indexOf(office);
+      this.form = Object.assign({}, office);
+      this.$modal.show('add-modal');
+    },
+    update_office(){ //内容を保存
+        /*
+        Object.assign(this.offices[this.editIndex], this.form);
+        this.$modal.hide('add-modal');
+        */
+        this.input_chack();
+    },
+    input_chack() {
       var error = '';
+      var error_chack = false;
       if(!this.form.name) {
         error += '企業名が未入力です！\n';
       }
@@ -83,28 +112,16 @@ const vue = new Vue({
 
       if(error) {
         this.$swal(error); //エラーメッセージがあれば表示
-      }else { //エラーメッセージがなければ登録
-        const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
-        this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
-        console.log(add_data);
-        this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
-        this.resetForm(); //resetFormの呼び出し
+      }else { //エラーメッセージなし
+        //console.log('エラーはなかったよ'); //本来の処理メソッドに戻る
+        if(document.getElementById("add_button")) {
+          console.log('追加ボタンが押されたよ');
+          //this.add_office(); 追加すると無限ループになる
+        }else {
+          console.log('変更ボタンが押されたよ');
+          //this.update_office(); 追加すると無限ループになる
+        }
       }
-    },
-    delete_office(office){ //削除
-      const index = this.offices.indexOf(office); //indexOfメソッドを使って削除を行った配列の番号を取得
-      this.offices.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
-      this.$modal.hide('add-modal');
-    },
-    edit_office(office){ //更新
-      this.createFlag = false,
-      this.editIndex = this.offices.indexOf(office);
-      this.form = Object.assign({}, office);
-      this.$modal.show('add-modal');
-    },
-    update_office(){ //内容を保存
-      Object.assign(this.offices[this.editIndex], this.form);
-      this.$modal.hide('add-modal');
     },
     resetForm(){ //モーダル内の入力値をリセット
       this.form.name = '';
