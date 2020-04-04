@@ -4,6 +4,23 @@ Vue.use(window["vue-js-modal"].default);
 const vue = new Vue({
   el:"#app",
   data: {
+    progress_manage: [
+      { id: 'review', text: '検討中' },
+      { id: 'making', text: 'ES作成中' },
+      { id: 'entered', text: 'エントリー済' },
+      { id: 'intern_dec', text: 'インターン参加決定' },
+      { id: 'intern_par', text: 'インターン参加済' },
+    ],
+    /*
+    select: [
+      { id: 'all', text: 'すべて' },
+      { id: 'review', text: '検討中' },
+      { id: 'making', text: 'ES作成中' },
+      { id: 'entered', text: 'エントリー済' },
+      { id: 'intern_dec', text: 'インターン参加決定' },
+      { id: 'intern_par', text: 'インターン参加済' },
+    ],
+    */
     form: {
       name: '',
       entry_start: '',
@@ -117,9 +134,16 @@ const vue = new Vue({
         if(document.getElementById("add_button")) {
           console.log('追加ボタンが押されたよ');
           //this.add_office(); 追加すると無限ループになる
+          const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
+          this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+          console.log(add_data);
+          this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
+          this.resetForm(); //resetFormの呼び出し
         }else {
           console.log('変更ボタンが押されたよ');
           //this.update_office(); 追加すると無限ループになる
+          Object.assign(this.offices[this.editIndex], this.form);
+          this.$modal.hide('add-modal');
         }
       }
     },

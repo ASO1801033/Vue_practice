@@ -26,6 +26,13 @@
         </div>
 
         <div v-else>
+          <!--
+          <span v-for="selected in select" :key="selected.id">
+            <input type="radio" name="show" :id="selected.id" :value="selected.value" v-model="show">
+            <label :for="selected.id" class="mr-3">{{ selected.text }}</label>
+          </span>
+          -->
+
           <table class="table">
             <thead>
               <tr>
@@ -99,11 +106,14 @@
                 <div class="form-group">
                   <label for="state">進捗状況</label>
                   <select class="form-control" id="state" v-model="form.state">
+                    <!--
                     <option>検討中</option>
                     <option>ES作成中</option>
                     <option>エントリー済</option>
                     <option>インターン参加決定</option>
                     <option>インターン参加済</option>
+                    -->
+                    <option v-for="progress in progress_manage">{{ progress.text }}</option>
                   </select>
                 </div>
 
