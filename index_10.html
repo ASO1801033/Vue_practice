@@ -32,6 +32,12 @@
             <label :for="selected.id" class="mr-3">{{ selected.text }}</label>
           </span>
           -->
+          <span>値段：</span>
+          <select v-model="selectprogress">
+            <option v-for="text1 in progress" v-bind:value="text1">
+              {{ text1 }}
+            </option>
+          </select> 円<br />
 
           <table class="table">
             <thead>
@@ -44,7 +50,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="office in offices">
+              <!--<tr v-for="office in offices">-->
+              <tr v-for="office in eventedAction">
                 <td class="align-middle text-center">{{ office.name }}</td>
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>

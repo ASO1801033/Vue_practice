@@ -1,6 +1,19 @@
 //vue-js-modalを使うためにVue.useを設定
 Vue.use(window["vue-js-modal"].default);
 
+const select_progress = [
+  { 'text1': 'すべて' },
+  { 'text1': '検討中' },
+  { 'text1': 'ES作成中' },
+  { 'text1': 'エントリー済' },
+  { 'text1': 'インターン参加決定' },
+  { 'text1': 'インターン参加済' },
+];
+
+const progress = [
+  'すべて', '検討中', 'ES作成中', 'エントリー済', 'インターン参加決定', 'インターン参加済'
+];
+
 const vue = new Vue({
   el:"#app",
   data: {
@@ -11,16 +24,6 @@ const vue = new Vue({
       { id: 'intern_dec', text: 'インターン参加決定' },
       { id: 'intern_par', text: 'インターン参加済' },
     ],
-    /*
-    select: [
-      { id: 'all', text: 'すべて' },
-      { id: 'review', text: '検討中' },
-      { id: 'making', text: 'ES作成中' },
-      { id: 'entered', text: 'エントリー済' },
-      { id: 'intern_dec', text: 'インターン参加決定' },
-      { id: 'intern_par', text: 'インターン参加済' },
-    ],
-    */
     form: {
       name: '',
       entry_start: '',
@@ -30,8 +33,11 @@ const vue = new Vue({
       state: '',
     },
     offices: [],
+    select_progress: select_progress,
     editIndex: -1, //update_officeで使う
     createFlag: true, //モーダルのボタン切り替え
+    progress: progress, //セレクトボックスの値
+    selectprogress: '', //選択されたセレクトボックスの値
   },
   // ↓ローカルストレージの実装
   watch: {
@@ -50,6 +56,19 @@ const vue = new Vue({
   },
   // ↑ローカルストレージの実装
 
+  computed: {
+    eventedAction: function() {
+      let list = this.select_progress.slice();
+
+      //priceでフィルタリング実施(セレクトボックスを使ってのフィルタリング)
+      if(this.selectprogress) {
+        list = list.filter(element => {
+          return element.text1 === this.selectprogress;
+        });
+      }
+      return list;
+    },
+  },
   methods: {
     Modal_show(){ //モーダルを表示
       this.createFlag = true;
