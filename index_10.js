@@ -1,19 +1,6 @@
 //vue-js-modalを使うためにVue.useを設定
 Vue.use(window["vue-js-modal"].default);
 
-const select_progress = [
-  { 'text1': 'すべて' },
-  { 'text1': '検討中' },
-  { 'text1': 'ES作成中' },
-  { 'text1': 'エントリー済' },
-  { 'text1': 'インターン参加決定' },
-  { 'text1': 'インターン参加済' },
-];
-
-const progress = [
-  'すべて', '検討中', 'ES作成中', 'エントリー済', 'インターン参加決定', 'インターン参加済'
-];
-
 const vue = new Vue({
   el:"#app",
   data: {
@@ -24,6 +11,14 @@ const vue = new Vue({
       { id: 'intern_dec', text: 'インターン参加決定' },
       { id: 'intern_par', text: 'インターン参加済' },
     ],
+    serect_state: [
+      { id: 'all', value: -1, label: 'すべて' },
+      { id: 'review', value: 0, label: '検討中' },
+      { id: 'making', value: 1, label: 'ES作成中' },
+      { id: 'entered', value: 2, label: 'エントリー済' },
+      { id: 'intern_dec', value: 3, label: 'インターン参加決定' },
+      { id: 'intern_par', value: 4, label: 'インターン参加済' },
+    ],
     form: {
       name: '',
       entry_start: '',
@@ -33,12 +28,11 @@ const vue = new Vue({
       state: '',
     },
     offices: [],
-    select_progress: select_progress,
     editIndex: -1, //update_officeで使う
     createFlag: true, //モーダルのボタン切り替え
-    progress: progress, //セレクトボックスの値
-    selectprogress: '', //選択されたセレクトボックスの値
+    current: -1, // 初期値を「-1」つまり「すべて」にする
   },
+
   // ↓ローカルストレージの実装
   watch: {
     offices: {
@@ -56,19 +50,6 @@ const vue = new Vue({
   },
   // ↑ローカルストレージの実装
 
-  computed: {
-    eventedAction: function() {
-      let list = this.select_progress.slice();
-
-      //priceでフィルタリング実施(セレクトボックスを使ってのフィルタリング)
-      if(this.selectprogress) {
-        list = list.filter(element => {
-          return element.text1 === this.selectprogress;
-        });
-      }
-      return list;
-    },
-  },
   methods: {
     Modal_show(){ //モーダルを表示
       this.createFlag = true;
@@ -154,7 +135,10 @@ const vue = new Vue({
           console.log('追加ボタンが押されたよ');
           //this.add_office(); 追加すると無限ループになる
           const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
-          this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+          //this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+          this.offices.push({
+
+          });
           console.log(add_data);
           this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
           this.resetForm(); //resetFormの呼び出し
@@ -174,5 +158,50 @@ const vue = new Vue({
       this.form.intern_end = '';
       this.form.state = '';
     },
+  },
+
+  computed: {
+    computedTodos: function() {
+      // データ current が -1 ならすべて
+      // それ以外なら current と state が一致するものだけに絞り込む
+      /*return this.offices.filter(function(el) {
+        return this.current < 0 ? true : this.current === el.state
+      }, this)*/
+      switch (this.current) {
+        case -1:
+          return this.offices;
+        case 0:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.tasks.filter(e => e.review); //trueの要素が抜き出される(idがdoneでないのもの)
+        case 1:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          console.log(this.current + '番がおされた');
+        case 2:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          console.log(this.current + '番がおされた');
+        case 3:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          console.log(this.current + '番がおされた');
+        case 4:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          console.log(this.current + '番がおされた');
+      }
+    }
+    /*
+    showTasks() {
+      switch (this.show) {
+        case 0: //すべて
+          return this.tasks;
+        case 1: //未完了
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.tasks.filter(e => !e.done); //trueの要素が抜き出される(idがdoneでないのもの)
+        case 2: //完了
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.tasks.filter(e => e.done); //trueの要素が抜き出される(idがdoneのもの)
+        default:
+          return [];
+      }
+    },
+    */
   },
 });

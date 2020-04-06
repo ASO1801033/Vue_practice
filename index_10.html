@@ -21,23 +21,17 @@
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
 
-        <div v-if="offices.length == 0" class="text-center">
+        <div v-if="computedTodos.length == 0" class="text-center">
           <h4>追加している企業はありません<br>追加してみましょう！</h4>
         </div>
 
         <div v-else>
-          <!--
-          <span v-for="selected in select" :key="selected.id">
-            <input type="radio" name="show" :id="selected.id" :value="selected.value" v-model="show">
-            <label :for="selected.id" class="mr-3">{{ selected.text }}</label>
-          </span>
-          -->
-          <span>値段：</span>
-          <select v-model="selectprogress">
-            <option v-for="text1 in progress" v-bind:value="text1">
-              {{ text1 }}
-            </option>
-          </select> 円<br />
+
+
+
+    <select v-model="current">
+      <option v-for="selected in serect_state">{{ selected.label }}</option>
+    </select>
 
           <table class="table">
             <thead>
@@ -51,7 +45,7 @@
             </thead>
             <tbody>
               <!--<tr v-for="office in offices">-->
-              <tr v-for="office in eventedAction">
+              <tr v-for="office in computedTodos">
                 <td class="align-middle text-center">{{ office.name }}</td>
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
@@ -120,7 +114,9 @@
                     <option>インターン参加決定</option>
                     <option>インターン参加済</option>
                     -->
-                    <option v-for="progress in progress_manage">{{ progress.text }}</option>
+                    <!--<option v-for="progress in progress_manage">{{ progress.text }}</option>-->
+                    <option v-for="no in serect_state.length - 1">{{ serect_state[no].label }}</option>
+                    <!--<option v-for="progress in serect_state">{{ progress.label }}</option>-->
                   </select>
                 </div>
 
