@@ -21,19 +21,28 @@
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
 
-        <div v-if="computedTodos.length == 0" class="text-center">
+        <div v-if="offices.length == 0" class="text-center">
           <h4>追加している企業はありません<br>追加してみましょう！</h4>
         </div>
 
         <div v-else>
 
 
+    <!--<select v-model="current">
+      <option v-for="selected in select_state" :key="selected.id" v-model="current">{{ selected.label }}</option>
+    </select>-->
+    <ul>
+      <li v-for="selected in select_state" :key="selected.id">
+        <input type="radio" name="show" :id="selected.id" :value="selected.value" v-model="current">
+        <label :for="selected.id">{{ selected.label }}</label>
+      </li>
+    </ul>
 
-    <select v-model="current">
-      <option v-for="selected in serect_state">{{ selected.label }}</option>
-    </select>
+    <div v-if="computedTodos.length == 0" class="text-center">
+      選択した進捗に登録されたデータはないよ〜
+    </div>
 
-          <table class="table">
+          <table v-else class="table">
             <thead>
               <tr>
                 <th class="align-middle text-center">企業名</th>
@@ -115,8 +124,8 @@
                     <option>インターン参加済</option>
                     -->
                     <!--<option v-for="progress in progress_manage">{{ progress.text }}</option>-->
-                    <option v-for="no in serect_state.length - 1">{{ serect_state[no].label }}</option>
-                    <!--<option v-for="progress in serect_state">{{ progress.label }}</option>-->
+                    <option v-for="no in select_state.length - 1">{{ select_state[no].label }}</option>
+                    <!--<option v-for="progress in select_state">{{ progress.label }}</option>-->
                   </select>
                 </div>
 

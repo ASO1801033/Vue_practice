@@ -11,7 +11,7 @@ const vue = new Vue({
       { id: 'intern_dec', text: 'インターン参加決定' },
       { id: 'intern_par', text: 'インターン参加済' },
     ],
-    serect_state: [
+    select_state: [
       { id: 'all', value: -1, label: 'すべて' },
       { id: 'review', value: 0, label: '検討中' },
       { id: 'making', value: 1, label: 'ES作成中' },
@@ -135,10 +135,15 @@ const vue = new Vue({
           console.log('追加ボタンが押されたよ');
           //this.add_office(); 追加すると無限ループになる
           const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
-          //this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
-          this.offices.push({
-
-          });
+          this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
+          /*this.offices.push({
+            name: this.form.name,
+            entry_start: this.form.entry_start,
+            entry_end: this.form.entry_end,
+            intern_start: this.form.intern_start,
+            intern_end: this.form.intern_end,
+            state: this.form.state,
+          });*/
           console.log(add_data);
           this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
           this.resetForm(); //resetFormの呼び出し
@@ -162,42 +167,37 @@ const vue = new Vue({
 
   computed: {
     computedTodos: function() {
-      // データ current が -1 ならすべて
-      // それ以外なら current と state が一致するものだけに絞り込む
-      /*return this.offices.filter(function(el) {
-        return this.current < 0 ? true : this.current === el.state
-      }, this)*/
       switch (this.current) {
         case -1:
           return this.offices;
         case 0:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.tasks.filter(e => e.review); //trueの要素が抜き出される(idがdoneでないのもの)
+          return this.offices.filter(e => e.this.form.state.検討中);
         case 1:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          console.log(this.current + '番がおされた');
+          return this.offices.filter(e => e.making);
         case 2:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          console.log(this.current + '番がおされた');
+          return this.offices.filter(e => e.entered);
         case 3:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          console.log(this.current + '番がおされた');
+          return this.offices.filter(e => e.intern_dec);
         case 4:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          console.log(this.current + '番がおされた');
+          return this.offices.filter(e => e.intern_par);
       }
     }
     /*
     showTasks() {
-      switch (this.show) {
-        case 0: //すべて
-          return this.tasks;
-        case 1: //未完了
+      switch (this.current) {
+        case -1: //すべて
+          return this.offices;
+        case 0: //未完了
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.tasks.filter(e => !e.done); //trueの要素が抜き出される(idがdoneでないのもの)
+          return this.offices.filter(e => !e.done); //trueの要素が抜き出される(idがdoneでないのもの)
         case 2: //完了
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.tasks.filter(e => e.done); //trueの要素が抜き出される(idがdoneのもの)
+          return this.offices.filter(e => e.done); //trueの要素が抜き出される(idがdoneのもの)
         default:
           return [];
       }
