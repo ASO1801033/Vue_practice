@@ -26,21 +26,15 @@
         </div>
 
         <div v-else>
+          絞り込み条件：
+          <span v-for="selected in select_state" :key="selected.id">
+            <input type="radio" :id="selected.id" :value="selected.value" v-model="current">
+            <label :for="selected.id" class="mr-3">{{ selected.label }}</label>
+          </span>
 
-
-    <!--<select v-model="current">
-      <option v-for="selected in select_state" :key="selected.id" v-model="current">{{ selected.label }}</option>
-    </select>-->
-    <ul>
-      <li v-for="selected in select_state" :key="selected.id">
-        <input type="radio" name="show" :id="selected.id" :value="selected.value" v-model="current">
-        <label :for="selected.id">{{ selected.label }}</label>
-      </li>
-    </ul>
-
-    <div v-if="computedTodos.length == 0" class="text-center">
-      選択した進捗に登録されたデータはないよ〜
-    </div>
+          <div v-if="computedTodos.length == 0" class="text-center">
+            選択した進捗に登録されたデータはないよ〜
+          </div>
 
           <table v-else class="table">
             <thead>

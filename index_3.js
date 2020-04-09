@@ -45,6 +45,7 @@ const vue = new Vue({
     },
     delete_user(user){ //メンバー削除
       const index = this.users.indexOf(user); //indexOfメソッドを使って削除を行ったメンバーの配列の番号を取得
+      console.log(index);
       this.users.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
     },
     edit_user(user){ //メンバー更新

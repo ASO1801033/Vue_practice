@@ -4,13 +4,6 @@ Vue.use(window["vue-js-modal"].default);
 const vue = new Vue({
   el:"#app",
   data: {
-    progress_manage: [
-      { id: 'review', text: '検討中' },
-      { id: 'making', text: 'ES作成中' },
-      { id: 'entered', text: 'エントリー済' },
-      { id: 'intern_dec', text: 'インターン参加決定' },
-      { id: 'intern_par', text: 'インターン参加済' },
-    ],
     select_state: [
       { id: 'all', value: -1, label: 'すべて' },
       { id: 'review', value: 0, label: '検討中' },
@@ -136,14 +129,6 @@ const vue = new Vue({
           //this.add_office(); 追加すると無限ループになる
           const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
           this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
-          /*this.offices.push({
-            name: this.form.name,
-            entry_start: this.form.entry_start,
-            entry_end: this.form.entry_end,
-            intern_start: this.form.intern_start,
-            intern_end: this.form.intern_end,
-            state: this.form.state,
-          });*/
           console.log(add_data);
           this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
           this.resetForm(); //resetFormの呼び出し
@@ -172,36 +157,20 @@ const vue = new Vue({
           return this.offices;
         case 0:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.this.form.state.検討中);
+          return this.offices.filter(e => e.state === '検討中');
         case 1:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.making);
+          return this.offices.filter(e => e.state === 'ES作成中');
         case 2:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.entered);
+          return this.offices.filter(e => e.state === 'エントリー済');
         case 3:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.intern_dec);
+          return this.offices.filter(e => e.state === 'インターン参加決定');
         case 4:
           //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.intern_par);
+          return this.offices.filter(e => e.state === 'インターン参加済');
       }
     }
-    /*
-    showTasks() {
-      switch (this.current) {
-        case -1: //すべて
-          return this.offices;
-        case 0: //未完了
-          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => !e.done); //trueの要素が抜き出される(idがdoneでないのもの)
-        case 2: //完了
-          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
-          return this.offices.filter(e => e.done); //trueの要素が抜き出される(idがdoneのもの)
-        default:
-          return [];
-      }
-    },
-    */
   },
 });
