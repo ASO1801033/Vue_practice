@@ -21,7 +21,7 @@ const vue = new Vue({
       state: '',
     },
     offices: [],
-    editIndex: -1, //update_officeで使う
+    edit_Index: -1, //update_officeで使う
     createFlag: true, //モーダルのボタン切り替え
     current: -1, // 初期値を「-1」つまり「すべて」にする
   },
@@ -59,20 +59,23 @@ const vue = new Vue({
         */
         this.input_chack();
     },
-    delete_office(office){ //削除
-      const index = this.offices.indexOf(office); //indexOfメソッドを使って削除を行った配列の番号を取得
-      this.offices.splice(index, 1) //spliceメソッドを使ってindex番目の要素1つを配列から削除
-      this.$modal.hide('add-modal');
-    },
     edit_office(office){ //更新
       this.createFlag = false,
-      this.editIndex = this.offices.indexOf(office);
+      this.edit_Index = this.offices.indexOf(office);
+      console.log(this.edit_Index);
+      console.log('操作ボタンが押されたよ');
       this.form = Object.assign({}, office);
       this.$modal.show('add-modal');
     },
+    delete_office(){ //削除
+      console.log(this.edit_Index);
+      console.log('削除ボタンが押されたよ');
+      this.offices.splice(this.edit_Index, 1);
+      this.$modal.hide('add-modal');
+    },
     update_office(){ //内容を保存
         /*
-        Object.assign(this.offices[this.editIndex], this.form);
+        Object.assign(this.offices[this.edit_Index], this.form);
         this.$modal.hide('add-modal');
         */
         this.input_chack();
@@ -135,7 +138,7 @@ const vue = new Vue({
         }else {
           console.log('変更ボタンが押されたよ');
           //this.update_office(); 追加すると無限ループになる
-          Object.assign(this.offices[this.editIndex], this.form);
+          Object.assign(this.offices[this.edit_Index], this.form);
           this.$modal.hide('add-modal');
         }
       }
@@ -149,7 +152,6 @@ const vue = new Vue({
       this.form.state = '';
     },
   },
-
   computed: {
     computedTodos: function() {
       switch (this.current) {

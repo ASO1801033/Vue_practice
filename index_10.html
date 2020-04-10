@@ -33,7 +33,7 @@
           </span>
 
           <div v-if="computedTodos.length == 0" class="text-center">
-            選択した進捗に登録されたデータはないよ〜
+            選択した進捗に登録されたデータはありません
           </div>
 
           <table v-else class="table">
@@ -125,7 +125,7 @@
 
                 <button class="btn btn-primary" id="add_button" v-on:click="add_office" v-if="createFlag">追加</button>
                 <div v-else>
-                  <button class="btn btn-danger" v-on:click="delete_office(office)">削除</button>
+                  <button class="btn btn-danger" v-on:click="delete_office">削除</button>
                   <button class="btn btn-primary" v-on:click="update_office">変更</button>
                 </div>
 
