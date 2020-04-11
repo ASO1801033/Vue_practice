@@ -15,7 +15,7 @@
     </head>
 
     <body>
-      <div id="app" class="m-3">
+      <div id="app" class="m-3 text-center">
         <h3 class="text-center">〜インターン向け企業情報管理リスト〜</h3>
         <div class="text-right">
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
@@ -32,8 +32,8 @@
             <label :for="selected.id" class="mr-3">{{ selected.label }}</label>
           </span>
 
-          <div v-if="computedTodos.length == 0" class="text-center">
-            選択した進捗に登録されたデータはありません
+          <div v-if="computedOffices.length == 0" class="text-center">
+            <h5>選択した進捗に登録されたデータはありません</h5>
           </div>
 
           <table v-else class="table">
@@ -47,8 +47,7 @@
               </tr>
             </thead>
             <tbody>
-              <!--<tr v-for="office in offices">-->
-              <tr v-for="office in computedTodos">
+              <tr v-for="office in computedOffices">
                 <td class="align-middle text-center">{{ office.name }}</td>
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
@@ -60,7 +59,7 @@
         </div>
 
 
-        <!-- ↓ついかボタンを押した時のモーダル -->
+        <!-- ↓追加ボタンか操作ボタンを押した時のモーダル -->
         <modal name="add-modal" :height="470">
           <div class="card">
             <div class="card-body">
@@ -73,6 +72,7 @@
                 <div class="form-group">
                   <label for="name">企業名</label>
                   <input type="text" class="form-control" id="name" placeholder="企業名を入力してください" v-model.trim="form.name">
+                  <!-- v-model.trimで空白は文字として扱わないようにする -->
                 </div>
 
                 <div class="row">
@@ -110,16 +110,7 @@
                 <div class="form-group">
                   <label for="state">進捗状況</label>
                   <select class="form-control" id="state" v-model="form.state">
-                    <!--
-                    <option>検討中</option>
-                    <option>ES作成中</option>
-                    <option>エントリー済</option>
-                    <option>インターン参加決定</option>
-                    <option>インターン参加済</option>
-                    -->
-                    <!--<option v-for="progress in progress_manage">{{ progress.text }}</option>-->
                     <option v-for="no in select_state.length - 1">{{ select_state[no].label }}</option>
-                    <!--<option v-for="progress in select_state">{{ progress.label }}</option>-->
                   </select>
                 </div>
 
@@ -133,7 +124,7 @@
             </div>
           </div>
         </modal>
-        <!-- ↑ついかボタンを押した時のモーダル -->
+        <!-- ↑追加ボタンか操作ボタンを押した時のモーダル -->
 
       </div>
       <script src="index_10.js"></script>

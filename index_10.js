@@ -21,7 +21,7 @@ const vue = new Vue({
       state: '',
     },
     offices: [],
-    edit_Index: -1, //update_officeで使う
+    edit_Index: -1, //update_officeとdelete_officeで使う
     createFlag: true, //モーダルのボタン切り替え
     current: -1, // 初期値を「-1」つまり「すべて」にする
   },
@@ -59,18 +59,16 @@ const vue = new Vue({
         */
         this.input_chack();
     },
-    edit_office(office){ //更新
+    edit_office(office){ //情報修正
       this.createFlag = false,
       this.edit_Index = this.offices.indexOf(office);
-      console.log(this.edit_Index);
-      console.log('操作ボタンが押されたよ');
+      console.log('操作ボタンが押されたよ' + this.edit_Index);
       this.form = Object.assign({}, office);
       this.$modal.show('add-modal');
     },
     delete_office(){ //削除
-      console.log(this.edit_Index);
-      console.log('削除ボタンが押されたよ');
-      this.offices.splice(this.edit_Index, 1);
+      console.log('削除ボタンが押されたよ' + this.edit_Index);
+      this.offices.splice(this.edit_Index, 1); //配列のedit_Index番目から1つの要素を削除する
       this.$modal.hide('add-modal');
     },
     update_office(){ //内容を保存
@@ -80,54 +78,53 @@ const vue = new Vue({
         */
         this.input_chack();
     },
-    input_chack() {
+    input_chack() { //入力値のチェック
       var error = '';
-      var error_chack = false;
-      if(!this.form.name) {
+      if(!this.form.name) { //nameが未入力
         error += '企業名が未入力です！\n';
       }
 
-      if(this.form.entry_start && this.form.entry_end) {
-        if(!(moment(this.form.entry_start).isSameOrBefore(this.form.entry_end))) {
+      if(this.form.entry_start && this.form.entry_end) { //entry_startとentry_endが入力されている
+        if(!(moment(this.form.entry_start).isSameOrBefore(this.form.entry_end))) { //entry_startはentry_endより前に設定されているか
          error += 'エントリー終了日はエントリー開始日以降に設定してください！\n';
         }
       }else {
-        if(!this.form.entry_start) {
+        if(!this.form.entry_start) { //entry_startが未入力
           error += 'エントリー開始日が未入力です！\n';
         }
-        if(!this.form.entry_end) {
+        if(!this.form.entry_end) { //entry_endが未入力
           error += 'エントリー終了日が未入力です！\n';
         }
       }
 
-      if(this.form.intern_start && this.form.intern_end) {
-        if(!(moment(this.form.intern_start).isSameOrBefore(this.form.intern_end))) {
+      if(this.form.intern_start && this.form.intern_end) { //intern_startとintern_endが入力されている
+        if(!(moment(this.form.intern_start).isSameOrBefore(this.form.intern_end))) { //intern_startはintern_endより前に設定されているか
          error += 'インターン終了日はインターン開始日以降に設定してください！\n';
         }
       }else {
-        if(!this.form.intern_start) {
+        if(!this.form.intern_start) { //intern_startが未入力
           error += 'インターン開始日が未入力です！\n';
         }
-        if(!this.form.intern_end) {
+        if(!this.form.intern_end) { //intern_endが未入力
           error += 'インターン終了日が未入力です！\n';
         }
       }
 
-      if(this.form.entry_end && this.form.intern_start) {
-        if(!(moment(this.form.entry_end).isSameOrBefore(this.form.intern_start))) {
+      if(this.form.entry_end && this.form.intern_start) { //entry_endとintern_startが入力されている
+        if(!(moment(this.form.entry_end).isSameOrBefore(this.form.intern_start))) { //entry_endはintern_startより前に設定されているか
          error += 'インターン開始日はエントリー終了日以降に設定してください！\n';
         }
       }
 
-      if(!this.form.state) {
+      if(!this.form.state) { //stateが未入力
         error += '進捗が未入力です！\n';
       }
 
       if(error) {
         this.$swal(error); //エラーメッセージがあれば表示
       }else { //エラーメッセージなし
-        //console.log('エラーはなかったよ'); //本来の処理メソッドに戻る
-        if(document.getElementById("add_button")) {
+        console.log('エラーはなかったよ');
+        if(document.getElementById("add_button")) { //押されたボタンが追加ボタンか
           console.log('追加ボタンが押されたよ');
           //this.add_office(); 追加すると無限ループになる
           const add_data = Object.assign({},this.form); //入力した値からadd_dataオブジェクトを作成
@@ -152,8 +149,8 @@ const vue = new Vue({
       this.form.state = '';
     },
   },
-  computed: {
-    computedTodos: function() {
+  computed: { //絞り込み処理
+    computedOffices: function() {
       switch (this.current) {
         case -1:
           return this.offices;
