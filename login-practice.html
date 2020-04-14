@@ -1,6 +1,35 @@
 <!-- 練習中 -->
+<html>
+  <html lang="en">
+    <head>
+      <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <!--<script src="https://unpkg.com/vue@2.4.2/dist/vue.min.js"></script>-->
+      <script src="https://unpkg.com/vue-router@2.7.0/dist/vue-router.min.js"></script>
+      <!-- vue-js-modalはCNDを利用 -->
+      <!--<script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>-->
+      <title>SPAのサンプルアプリケーション</title>
+      <!-- bootstapの読み込み -->
+      <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+      <!-- moment.js -->
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>-->
+      <!-- vue-swal(アラートのライブラリ) -->
+      <!--<script src="https://unpkg.com/vue-swal"></script>-->
+    </head>
 
-<!DOCTYPE html>
+    <body>
+      <div id="app">
+        <div class="container">
+          <div class="content">
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+      <script src="login-practice.js"></script>
+    </body>
+  </html>
+</html>
+<!--<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -155,4 +184,4 @@
     });
   </script>
   </body>
-</html>
+</html>-->
