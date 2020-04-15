@@ -1,9 +1,14 @@
 //認証情報はこのオブジェクトで管理する。
 var Auth = {
-  loggedIn: false,
+  loggedIn: false, //★わからない(loggedInとは)
   login: function(email, pass) {
     //TODO: ここはサーバで認証処理(login)を実行する。
-    (email == "vue@example.com" && pass == "vue" )?this.loggedIn = true:this.loggedIn = false;
+    //(email == "vue@example.com" && pass == "vue")?this.loggedIn = true:this.loggedIn = false;
+    if(email == "vue@example.com" && pass == "vue") {
+      this.loggedIn = true;
+    }else {
+      this.loggedIn = false;
+    }
     //TODO: サーバから取得したtokenをlocalstrageに保存するように変更が必要。
     localStorage.token = Math.random().toString(36).substring(7)
     return this.loggedIn;
@@ -18,18 +23,18 @@ var Auth = {
 //トップメニューコンポーネント
 var Top = {
   template: '<div>'
-            +'<h2>Top</h2>'
-            +'<div style="width:600px;text-align:right;">'
-            +'<router-link to="/logout">Logout</router-link>'
-            +'</div>'
-            +'<ul>'
-            +'<li>'
-            +'メニュー１'
-            +'</li>'
-            +'<li>'
-            +'メニュー２'
-            +'</li>'
-            +'</ul>'
+            + '<h2>Top</h2>'
+            + '<div style="width:600px;text-align:right;">'
+            +   '<router-link to="/logout">Logout</router-link>'
+            + '</div>'
+            +   '<ul>'
+            +     '<li>'
+            +       'メニュー１'
+            +     '</li>'
+            +     '<li>'
+            +      'メニュー２'
+            +     '</li>'
+            +   '</ul>'
             +'</div>'
 };
 
@@ -37,18 +42,17 @@ var Top = {
 var Login = {
   template: ''
       +'<div>'
-      +'  <h2>Login</h2>'
-      +'  <p v-if="$route.query.redirect">'
-      +'    ログインしてください'
-      +'  </p>'
-      +'  <p v-if="error" class="error">ログインに失敗しました</p>'
-      +'  <form @submit.prevent="login">'
-      +'  <table>'
-      +'    <tr><td>E-Mail:</td><td><input v-model="email" placeholder="email"></td></tr>'
-      +'    <tr><td>password:</td><td><input v-model="pass" placeholder="password" type="password"></td></tr>'
-      +'  </table>'
-      +'  <input type="submit" value="Login" v-on:click="login">'
-      +'  </form>'
+      + '<h2>Login</h2>'
+      + '<p v-if="$route.query.redirect">ログインしてください</p>'
+      + '<p v-if="error" class="error">ログインに失敗しました</p>'
+      //+ '<form @submit.prevent="login">'
+      + '<form>'
+      +   '<table>'
+      +     '<tr><td>E-Mail:</td><td><input v-model="email" placeholder="email"></td></tr>'
+      +     '<tr><td>password:</td><td><input v-model="pass" placeholder="password" type="password"></td></tr>'
+      +    '</table>'
+      +   '<input type="submit" value="Login" v-on:click="login">' //v-on:click="login"でmethodsのloginを実行
+      + '</form>'
       +'</div>',
   data: function () {
     return {
@@ -59,9 +63,9 @@ var Login = {
   },
   methods: {
     login: function() {
-      this.error = !Auth.login(this.email, this.pass);
+      this.error = !Auth.login(this.email, this.pass); //!Auth.login(this.email, this.pass)でvar Authのloginを実行
 
-      if (!this.error) {
+      if (!this.error) { //this.errorがtrueのとき
         router.push(this.$route.query.redirect);
       };
     }
@@ -75,16 +79,16 @@ var Logout = {
   methods: {
     logout: function() {
       Auth.logout();
-      router.push('/top');
+      router.push('/top'); //★わからない
     }
   },
-  created: function(){
+  created: function(){ //★わからない(なんのためにある)
     this.logout()
   }
 };
 
 //ルーター定義
-var routes = [
+var routes = [ //★わからない
   { path: '/top', component: Top, meta: { requiresAuth: true }},
   { path: '/login', component: Login },
   { path: '/logout', component: Logout },
@@ -96,12 +100,12 @@ var routes = [
 ];
 
 //ルーター
-var router = new VueRouter({
+var router = new VueRouter({ //★わからない
   "routes": routes
 });
 
 //認証がない場合は、ログインページに遷移する。
-router.beforeEach(function (to, from, next) {
+router.beforeEach(function (to, from, next) { //★わからない
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
   }) && !Auth.loggedIn) {
