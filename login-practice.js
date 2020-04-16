@@ -1,41 +1,45 @@
 //認証情報はこのオブジェクトで管理する。
 var Auth = {
-  loggedIn: false, //★わからない(loggedInとは)
+  loggedIn: false,
   login: function(email, pass) {
     //TODO: ここはサーバで認証処理(login)を実行する。
     //(email == "vue@example.com" && pass == "vue")?this.loggedIn = true:this.loggedIn = false;
     if(email == "vue@example.com" && pass == "vue") {
-      this.loggedIn = true;
+      this.loggedIn = true; //emailとpassが一致
     }else {
-      this.loggedIn = false;
+      this.loggedIn = false; //emailとpassが不一致
     }
     //TODO: サーバから取得したtokenをlocalstrageに保存するように変更が必要。
+    //Math.random()で乱数、Math.random().toString(36)でブラウザでは36進数になる(0-9a-zの36文字)
+    //.substring(7)で7文字目から最後までの文字列を切り出す(0から始まるインデックス)
     localStorage.token = Math.random().toString(36).substring(7)
+    console.log(localStorage.token);
     return this.loggedIn;
   },
   logout: function() {
     //TODO: ここはサーバで認証処理(logout)を実行する。
     this.loggedIn = false
-    delete localStorage.token
+    delete localStorage.token //localStorage.tokenの内容を削除
   }
 };
 
 //トップメニューコンポーネント
 var Top = {
-  template: '<div>'
-            + '<h2>Top</h2>'
-            + '<div style="width:600px;text-align:right;">'
-            +   '<router-link to="/logout">Logout</router-link>'
-            + '</div>'
-            +   '<ul>'
-            +     '<li>'
-            +       'メニュー１'
-            +     '</li>'
-            +     '<li>'
-            +      'メニュー２'
-            +     '</li>'
-            +   '</ul>'
-            +'</div>'
+  template: ''
+      + '<div>'
+      + '<h2>Top</h2>'
+      + '<div style="width:600px;text-align:right;">'
+      +   '<router-link to="/logout">Logout</router-link>'
+      + '</div>'
+      +   '<ul>'
+      +     '<li>'
+      +       'メニュー１'
+      +     '</li>'
+      +     '<li>'
+      +      'メニュー２'
+      +     '</li>'
+      +   '</ul>'
+      +'</div>'
 };
 
 //ログインコンポーネント
@@ -63,10 +67,14 @@ var Login = {
   },
   methods: {
     login: function() {
-      this.error = !Auth.login(this.email, this.pass); //!Auth.login(this.email, this.pass)でvar Authのloginを実行
+      //!Auth.login(this.email, this.pass)でvar Authのloginを実行
+      this.error = !Auth.login(this.email, this.pass);
 
+      //もう少し調べる！！！
       if (!this.error) { //this.errorがtrueのとき
         router.push(this.$route.query.redirect);
+        //このメソッドは <router-link> をクリックした時に内部的に呼ばれています。
+        //つまり <router-link :to="..."> をクリックすることは router.push(...) を呼ぶことと等価です。
       };
     }
   }
@@ -79,7 +87,8 @@ var Logout = {
   methods: {
     logout: function() {
       Auth.logout();
-      router.push('/top'); //★わからない
+      //router.push('/top'); //文字列パスで指定
+      router.push({ path: '/top' }); //オブジェクトで指定
     }
   },
   created: function(){ //★わからない(なんのためにある)
@@ -88,7 +97,7 @@ var Logout = {
 };
 
 //ルーター定義
-var routes = [ //★わからない
+var routes = [ //★meta: { requiresAuth: true }がわからない
   { path: '/top', component: Top, meta: { requiresAuth: true }},
   { path: '/login', component: Login },
   { path: '/logout', component: Logout },
@@ -100,7 +109,7 @@ var routes = [ //★わからない
 ];
 
 //ルーター
-var router = new VueRouter({ //★わからない
+var router = new VueRouter({
   "routes": routes
 });
 
