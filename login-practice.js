@@ -1,14 +1,37 @@
 //認証情報はこのオブジェクトで管理する。
 var Auth = {
+  user: [
+    { email: 'vue@example.com', pass: 'vue' },
+    { email: 'java@example.com', pass: 'java' },
+    { email: 'ruby@example.com', pass: 'ruby' },
+    { email: 'python@example.com', pass: 'python' },
+  ],
   loggedIn: false,
   login: function(email, pass) {
     //TODO: ここはサーバで認証処理(login)を実行する。
+
+    let cnt = 0
+    while(cnt <= this.user.length - 1) {
+      if(email == this.user[cnt]['email']) {
+        //console.log(i + '：' + this.user[i]['pass']);
+        if(pass == this.user[cnt]['pass']) {
+          this.loggedIn = true; //emailとpassが一致
+        }else {
+          this.loggedIn = false; //emailとpassが不一致
+        }
+      }
+      cnt++;
+    }
+
     //(email == "vue@example.com" && pass == "vue")?this.loggedIn = true:this.loggedIn = false;
+    /*
     if(email == "vue@example.com" && pass == "vue") {
+    //if(email == this.user[0]['email'] && pass == this.user[0]['pass']) {
       this.loggedIn = true; //emailとpassが一致
     }else {
       this.loggedIn = false; //emailとpassが不一致
-    }
+    }*/
+
     //TODO: サーバから取得したtokenをlocalstrageに保存するように変更が必要。
     //Math.random()で乱数、Math.random().toString(36)でブラウザでは36進数になる(0-9a-zの36文字)
     //.substring(7)で7文字目から最後までの文字列を切り出す(0から始まるインデックス)
@@ -60,7 +83,8 @@ var Login = {
       +'</div>',
   data: function () {
     return {
-      email: 'vue@example.com',
+      //email: 'vue@example.com',
+      email: '',
       pass: '',
       error: false
     }
