@@ -80,7 +80,6 @@ const vue = new Vue({
     },
     input_chack() { //入力値のチェック
       var error = '';
-      var clear_message = '追加しました！';
       if(!this.form.name) { //nameが未入力
         error += '企業名が未入力です！\n';
       }
@@ -132,7 +131,6 @@ const vue = new Vue({
           this.offices.push(add_data); //配列のpushメソッドを使って配列の一番後ろに作成したadd_dataオブジェクトを追加
           console.log(add_data);
           this.$modal.hide('add-modal'); //追加が完了するとthis.$modal.hideでモーダルウィンドウを非表示
-          this.$swal(clear_message);
           this.resetForm(); //resetFormの呼び出し
         }else {
           console.log('変更ボタンが押されたよ');
