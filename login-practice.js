@@ -80,6 +80,8 @@ var Login = {
       +    '</table>'
       +   '<input type="submit" value="Login" v-on:click="login">' //v-on:click="login"でmethodsのloginを実行
       + '</form>'
+      + '<button v-on:click="Modal_show">パスワードを忘れた場合</button>'  //ならない
+      + '<modal name="Show">こんにちは</modal>'  //ならない
       +'</div>',
   data: function () {
     return {
@@ -94,7 +96,6 @@ var Login = {
       //!Auth.login(this.email, this.pass)でvar Authのloginを実行
       this.error = !Auth.login(this.email, this.pass);
 
-      //もう少し調べる！！！
       if (!this.error) { //this.errorがtrueのとき
         router.push(this.$route.query.redirect);
         //このメソッドは <router-link> をクリックした時に内部的に呼ばれています。
@@ -148,7 +149,15 @@ router.beforeEach(function (to, from, next) { //★わからない
   }
 });
 
+//vue-js-modalを使うためにVue.useを設定
+Vue.use(window["vue-js-modal"].default); //ならない
+
 var app = new Vue({
   el: '#app',
-  "router": router
+  "router": router,
+  methods: { //ならない
+    Modal_show(){ //ためし
+      this.$modal.show('Show'); //ならない
+    },
+  }
 });

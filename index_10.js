@@ -44,6 +44,9 @@ const vue = new Vue({
   // ↑ローカルストレージの実装
 
   methods: {
+    show(){ //ためし
+      this.$modal.show('show');
+    },
     Modal_show(){ //モーダルを表示
       this.createFlag = true;
       this.resetForm();
