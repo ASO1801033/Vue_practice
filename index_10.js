@@ -19,6 +19,7 @@ const vue = new Vue({
       intern_start: '',
       intern_end: '',
       state: '',
+      url: '',
     },
     offices: [],
     edit_Index: -1, //update_officeとdelete_officeで使う
@@ -44,9 +45,6 @@ const vue = new Vue({
   // ↑ローカルストレージの実装
 
   methods: {
-    show(){ //ためし
-      this.$modal.show('show');
-    },
     Modal_show(){ //モーダルを表示
       this.createFlag = true;
       this.resetForm();
@@ -150,6 +148,7 @@ const vue = new Vue({
       this.form.intern_start = '';
       this.form.intern_end = '';
       this.form.state = '';
+      this.form.url = '';
     },
   },
   computed: { //絞り込み処理

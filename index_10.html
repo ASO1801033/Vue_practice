@@ -17,7 +17,6 @@
     <body>
       <div id="app" class="m-3 text-center">
         <h3 class="text-center">〜インターン向け企業情報管理リスト〜</h3>
-        <button v-on:click="show">ボタン</button>
         <div class="text-right">
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
@@ -44,6 +43,7 @@
                 <th class="align-middle text-center">エントリー期日</th>
                 <th class="align-middle text-center">インターン期日</th>
                 <th class="align-middle text-center">進捗</th>
+                <th class="align-middle text-center">URL</th>
                 <th class="align-middle text-center">操作</th>
               </tr>
             </thead>
@@ -53,16 +53,15 @@
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
                 <td class="align-middle text-center">{{ office.state }}</td>
+                <td class="align-middle text-center"><a href="{{ office.url }}" target="_blank">{{ office.url }}</a></td>
                 <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">操作</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <modal name="show">grnke:agnkr;ps:ngejk;prjspaei</modal>
-
         <!-- ↓追加 or 操作ボタンを押した時のモーダル -->
-        <modal name="add-modal" :height="470">
+        <modal name="add-modal" :height="550">
           <div class="card">
             <div class="card-body">
               <div class="card-title">
@@ -114,6 +113,11 @@
                   <select class="form-control" id="state" v-model="form.state">
                     <option v-for="no in select_state.length - 1">{{ select_state[no].label }}</option>
                   </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="url">URL</label>
+                  <input type="text" class="form-control" id="url" v-model="form.url" placeholder="URLを任意で入力してください">
                 </div>
 
                 <button class="btn btn-primary" id="add_button" v-on:click="add_office" v-if="createFlag">追加</button>
