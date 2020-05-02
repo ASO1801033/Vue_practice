@@ -5,10 +5,16 @@ const About = { template: '<div>会社までのアクセス方法は....</div>'}
 
 // (2)ルーティングの設定
 const router = new VueRouter({
+  var route1 = 'https://www.google.com',
   routes : [
-    {path:'/', component : Home},
-    {path:'/news',component: News},
-    {path:'/about',component: About}
+    { path: '/', component : Home },
+    { path: '/news',component: News },
+    { path: '/about',component: About },
+    { path: '/event/:id', // 動的セグメントをコロン:で設定
+      name: 'Event',
+      components: {}
+        // 複数のコンポーネントを指定 },
+    }
   ]
 });
 

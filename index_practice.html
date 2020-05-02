@@ -13,6 +13,11 @@
         <router-link to="/">ホーム</router-link>
         <router-link to="/news">ニュース</router-link>
         <router-link to="/about">About</router-link>
+
+        <router-link to="home">Home</router-link> <!-- <a href="home">Home</a>と同じ -->
+        <a href="https://www.google.com">google2</a>
+        <router-link v-bind:to="{ name : 'Event', params : { id: event.id }}"></router-link>
+
       </nav>
       <router-view/>
   	</div>
