@@ -141,7 +141,7 @@ const vue = new Vue({
         }
       }
     },
-    resetForm(){ //モーダル内の入力値をリセット
+    resetForm() { //モーダル内の入力値をリセット
       this.form.name = '';
       this.form.entry_start = '';
       this.form.entry_end = '';
@@ -149,6 +149,14 @@ const vue = new Vue({
       this.form.intern_end = '';
       this.form.state = '';
       this.form.url = '';
+    },
+    urlclick(office) {
+      console.log('クリックされた');
+      this.edit_Index = this.offices.indexOf(office);
+      console.log(this.edit_Index);
+      var url = this.offices[this.edit_Index].url;
+      console.log(url);
+      return url;
     },
   },
   computed: { //絞り込み処理
