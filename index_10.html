@@ -53,7 +53,7 @@
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
                 <td class="align-middle text-center">{{ office.state }}</td>
-                <td class="align-middle text-center"><a href=$url v-on:click="urlclick(office)" target="_blank">{{ office.url }}</a></td>
+                <td class="align-middle text-center"><a href="{{ $url }}" v-on:click="urlclick(office)" target="_blank">{{ office.url }}</a></td>
                 <!-- <td><router-link to="{{ office.url }}"><a>{{ office.url }}</a></router-link></td> -->
                 <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">操作</button></td>
               </tr>

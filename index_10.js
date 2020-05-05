@@ -150,14 +150,22 @@ const vue = new Vue({
       this.form.state = '';
       this.form.url = '';
     },
-    urlclick(office) {
+    /*urlclick(office) {
       console.log('クリックされた');
       this.edit_Index = this.offices.indexOf(office);
       console.log(this.edit_Index);
       var url = this.offices[this.edit_Index].url;
       console.log(url);
       return url;
-    },
+    },*/
+    urlclick : function(office) {
+      console.log('クリックされた');
+      this.edit_Index = this.offices.indexOf(office);
+      console.log(this.edit_Index);
+      var url = this.offices[this.edit_Index].url;
+      console.log(url);
+      return this.url;
+    }
   },
   computed: { //絞り込み処理
     computedOffices: function() {
