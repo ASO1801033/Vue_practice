@@ -43,7 +43,7 @@
                 <th class="align-middle text-center">エントリー期日</th>
                 <th class="align-middle text-center">インターン期日</th>
                 <th class="align-middle text-center">進捗</th>
-                <th class="align-middle text-center">URL</th>
+                <!-- <th class="align-middle text-center">URL</th> -->
                 <th class="align-middle text-center">操作</th>
               </tr>
             </thead>
@@ -53,7 +53,7 @@
                 <td class="align-middle text-center">開始日：{{ office.entry_start }}<br>終了日：{{ office.entry_end }}</td>
                 <td class="align-middle text-center">開始日：{{ office.intern_start }}<br>終了日：{{ office.intern_end }}</td>
                 <td class="align-middle text-center">{{ office.state }}</td>
-                <td class="align-middle text-center"><a href="{{ $url }}" v-on:click="urlclick(office)" target="_blank">{{ office.url }}</a></td>
+                <!-- <td class="align-middle text-center"><a href="{{ $url }}" v-on:click="urlclick(office)" target="_blank">{{ office.url }}</a></td> -->
                 <!-- <td><router-link to="{{ office.url }}"><a>{{ office.url }}</a></router-link></td> -->
                 <td class="align-middle text-center"><button class="btn btn-primary" v-on:click="edit_office(office)">操作</button></td>
               </tr>
@@ -116,10 +116,12 @@
                   </select>
                 </div>
 
+                <!--
                 <div class="form-group">
                   <label for="url">URL</label>
                   <input type="text" class="form-control" id="url" v-model="form.url" placeholder="URLを任意で入力してください">
                 </div>
+                -->
 
                 <button class="btn btn-primary" id="add_button" v-on:click="add_office" v-if="createFlag">追加</button>
                 <div v-else>

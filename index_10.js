@@ -19,7 +19,7 @@ const vue = new Vue({
       intern_start: '',
       intern_end: '',
       state: '',
-      url: '',
+      //url: '',
     },
     offices: [],
     edit_Index: -1, //update_officeとdelete_officeで使う
@@ -148,7 +148,7 @@ const vue = new Vue({
       this.form.intern_start = '';
       this.form.intern_end = '';
       this.form.state = '';
-      this.form.url = '';
+      //this.form.url = '';
     },
     /*urlclick(office) {
       console.log('クリックされた');
@@ -158,14 +158,6 @@ const vue = new Vue({
       console.log(url);
       return url;
     },*/
-    urlclick : function(office) {
-      console.log('クリックされた');
-      this.edit_Index = this.offices.indexOf(office);
-      console.log(this.edit_Index);
-      var url = this.offices[this.edit_Index].url;
-      console.log(url);
-      return this.url;
-    }
   },
   computed: { //絞り込み処理
     computedOffices: function() {
