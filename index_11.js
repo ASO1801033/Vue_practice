@@ -7,6 +7,10 @@ var app  = new Vue({
     title: '家計簿つけつけマン',
     form: {
       date: '',
+      in_ex: '',
+      wallet: '',
+      price: '',
+      category: '',
     },
   },
   methods: {
@@ -16,6 +20,10 @@ var app  = new Vue({
     },
     resetForm() { //モーダル内の入力値をリセット
       this.form.date = '';
+      this.form.in_ex = '';
+      this.form.wallet = '';
+      this.form.price = '';
+      this.form.category = '';
     },
   },
 });

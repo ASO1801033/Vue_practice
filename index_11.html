@@ -16,11 +16,11 @@
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
 
-        日付/種別(支払い・受取り)/金額(+ or -)/残高/メモ<br>
+        日付・収支の種類(支払い・受取り)・財布元・金額・残高・メモ<br>
         (ex)2020-05-08/支払い/-520/1050/電車代<br>
 
         <!-- ↓モーダル -->
-        <modal name="pay-modal">
+        <modal name="pay-modal" :width="500" :height="500">
           <div class="card">
             <div class="card-body">
               <div class="card-title">
@@ -29,13 +29,66 @@
 
               <div class="card-text">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="date">日付</label>
                       <input type="date" class="form-control" id="date" v-model="form.date">
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="in_ex">収支</label>
+                      <select class="form-control" name="in_ex" v-model="form.in_ex">
+                        <option value="income">収入(+)</option>
+                        <option value="expense">支出(-)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="wallet">財布元</label>
+                      <select class="form-control" name="wallet" v-model="form.wallet">
+                        <option value="money">現金</option>
+                        <option value="card">クレジットカード</option>
+                        <option value="electronic">電子マネー/QRコード・バーコード決済</option>
+                        <option value="deduct">口座引き落とし</option>
+                        <option value="deposit">振り込み</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="price">金額</label>
+                      <input type="text" class="form-control" name="price" v-model="form.price">
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="category">カテゴリー</label>
+                      <select class="form-control" name="category" v-model="form.category">
+                        <option value="">食費</option>
+                        <option value="">固定費</option>
+                        <option value="">通信費</option>
+                        <option value="">外食費</option>
+                        <option value="">日用品費</option>
+                        <option value="">被服・美容費</option>
+                        <option value="">娯楽費</option>
+                        <option value="">交通費</option>
+                        <option value="">医療費</option>
+                        <option value="">特別費</option>
+                        <option value="">特別費</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
