@@ -52,11 +52,14 @@
                     <div class="form-group">
                       <label for="wallet">財布元</label>
                       <select class="form-control" name="wallet" v-model="form.wallet">
+                        <!--
                         <option value="money">現金</option>
                         <option value="card">クレジットカード</option>
                         <option value="electronic">電子マネー/QRコード・バーコード決済</option>
                         <option value="deduct">口座引き落とし</option>
                         <option value="deposit">振り込み</option>
+                        -->
+                        <option v-for="n in wallet_items.length - 1">{{ wallet_items[n].item }}</option>
                       </select>
                     </div>
                   </div>
@@ -69,9 +72,11 @@
                       <input type="text" class="form-control" name="price" v-model="form.price">
                     </div>
                   </div>
+
                   <div class="col-6">
                     <div class="form-group">
                       <label for="category">カテゴリー</label>
+                      <!--
                       <select class="form-control" name="category" v-model="form.category">
                         <option value="">食費</option>
                         <option value="">固定費</option>
@@ -83,11 +88,25 @@
                         <option value="">交通費</option>
                         <option value="">医療費</option>
                         <option value="">特別費</option>
-                        <option value="">特別費</option>
+                      </select>
+                      -->
+                      <select class="form-control" name="category" v-model="form.category">
+                        <option v-for="n in category_items.length - 1">{{ category_items[n].item }}</option>
                       </select>
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="memo">メモ</label>
+                      <input type="text" class="form-control" name="memo" v-model="form.memo">
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" id="" v-on:click="">追加</button>
 
               </div>
             </div>

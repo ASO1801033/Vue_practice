@@ -12,6 +12,27 @@ var app  = new Vue({
       price: '',
       category: '',
     },
+    wallet_items: [
+      { item: 'すべて', value: 'all' },
+      { item: '現金', value: 'money' },
+      { item: 'クレジットカード', value: 'card' },
+      { item: '電子マネー/QRコード・バーコード決済', value: 'electronic' },
+      { item: '口座引き落とし', value: 'deduct' },
+      { item: '振り込み', value: 'deposit' },
+    ],
+    category_items: [
+      { item: 'すべて' },
+      { item: '食費' },
+      { item: '固定費' },
+      { item: '通信費' },
+      { item: '外食費' },
+      { item: '日用品費' },
+      { item: '被服・美容費' },
+      { item: '娯楽費' },
+      { item: '交通費' },
+      { item: '医療費' },
+      { item: '特別費' },
+    ],
   },
   methods: {
     Modal_show(){ //モーダルを表示
