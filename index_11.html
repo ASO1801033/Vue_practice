@@ -19,6 +19,29 @@
         日付・収支の種類(支払い・受取り)・財布元・金額・残高・メモ<br>
         (ex)2020-05-08/支払い/-520/1050/電車代<br>
 
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="align-middle text-center">日付</th>
+              <th class="align-middle text-center">収支</th>
+              <th class="align-middle text-center">財布元</th>
+              <th class="align-middle text-center">金額</th>
+              <th class="align-middle text-center">分類</th>
+              <th class="align-middle text-center">メモ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="data in payment">
+              <td class="align-middle text-center">{{ data.date }}</td>
+              <td class="align-middle text-center">{{ data.in_ex }}</td>
+              <td class="align-middle text-center">{{ data.wallet }}</td>
+              <td class="align-middle text-center">{{ data.price }}</td>
+              <td class="align-middle text-center">{{ data.category }}</td>
+              <td class="align-middle text-center">{{ data.memo }}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <!-- ↓モーダル -->
         <modal name="pay-modal" :width="500" :height="500">
           <div class="card">
@@ -42,8 +65,8 @@
                     <div class="form-group">
                       <label for="in_ex">収支</label>
                       <select class="form-control" name="in_ex" v-model="form.in_ex">
-                        <option value="income">収入(+)</option>
-                        <option value="expense">支出(-)</option>
+                        <option value="収入">収入(+)</option>
+                        <option value="支出">支出(-)</option>
                       </select>
                     </div>
                   </div>
@@ -59,7 +82,8 @@
                         <option value="deduct">口座引き落とし</option>
                         <option value="deposit">振り込み</option>
                         -->
-                        <option v-for="n in wallet_items.length - 1">{{ wallet_items[n].item }}</option>
+                        <!--<option v-for="n in wallet_items.length - 1">{{ wallet_items[n].item }}</option>-->
+                        <option v-for="wallet in wallet_items">{{ wallet.item }}</option>
                       </select>
                     </div>
                   </div>
@@ -91,7 +115,8 @@
                       </select>
                       -->
                       <select class="form-control" name="category" v-model="form.category">
-                        <option v-for="n in category_items.length - 1">{{ category_items[n].item }}</option>
+                        <!--<option v-for="n in category_items.length - 1">{{ category_items[n].item }}</option>-->
+                        <option v-for="category in category_items">{{ category.item }}</option>
                       </select>
                     </div>
                   </div>
@@ -106,7 +131,7 @@
                   </div>
                 </div>
 
-                <button class="btn btn-primary" id="" v-on:click="">追加</button>
+                <button class="btn btn-primary" v-on:click="add_pay">追加</button>
 
               </div>
             </div>

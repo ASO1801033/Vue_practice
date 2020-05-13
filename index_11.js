@@ -13,15 +13,15 @@ var app  = new Vue({
       category: '',
     },
     wallet_items: [
-      { item: 'すべて', value: 'all' },
-      { item: '現金', value: 'money' },
-      { item: 'クレジットカード', value: 'card' },
-      { item: '電子マネー/QRコード・バーコード決済', value: 'electronic' },
-      { item: '口座引き落とし', value: 'deduct' },
-      { item: '振り込み', value: 'deposit' },
+      //{ item: 'すべて', value: 'all' },
+      { item: '現金'/*, value: 'money'*/ },
+      { item: 'クレジットカード'/*, value: 'card'*/ },
+      { item: '電子マネー/QRコード・バーコード'/*, value: 'electronic'*/ },
+      { item: '引き落とし'/*, value: 'deduct'*/ },
+      { item: '振り込み'/*, value: 'deposit'*/ },
     ],
     category_items: [
-      { item: 'すべて' },
+      //{ item: 'すべて' },
       { item: '食費' },
       { item: '固定費' },
       { item: '通信費' },
@@ -32,19 +32,29 @@ var app  = new Vue({
       { item: '交通費' },
       { item: '医療費' },
       { item: '特別費' },
+      { item: '給与' },
     ],
+    payment: [],
   },
   methods: {
-    Modal_show(){ //モーダルを表示
+    Modal_show(){
       this.resetForm();
       this.$modal.show('pay-modal');
     },
-    resetForm() { //モーダル内の入力値をリセット
+    add_pay() {
+      const data = Object.assign({},this.form);
+      this.payment.push(data);
+      console.log(data);
+      this.$modal.hide('pay-modal');
+      this.resetForm();
+    },
+    resetForm() {
       this.form.date = '';
       this.form.in_ex = '';
       this.form.wallet = '';
       this.form.price = '';
       this.form.category = '';
+      this.form.memo = '';
     },
   },
 });
