@@ -36,6 +36,22 @@ var app  = new Vue({
     ],
     payment: [],
   },
+  // ↓ローカルストレージの実装
+  watch: {
+    payment: {
+      handler: function(){ //変更があったら、handlerの中のメソッドが起動する
+        localStorage.setItem('payment', JSON.stringify(this.payment));
+        //保存は localStorage.setItem() が使われる
+      },
+      deep: true
+    }
+  },
+  mounted: function(){
+    this.payment = JSON.parse(localStorage.getItem('payment')) || [];
+    //保存されているデータは localStorage.getItem() で読み込まれる
+    // JSON.parse() でオブジェクト化をする
+  },
+  // ↑ローカルストレージの実装
   methods: {
     Modal_show(){
       this.resetForm();
