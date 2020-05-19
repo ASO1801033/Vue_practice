@@ -35,6 +35,8 @@ var app  = new Vue({
       { item: '給与' },
     ],
     payment: [],
+    edit_Index: -1,
+    create_Flag: true,
   },
   // ↓ローカルストレージの実装
   watch: {
@@ -63,6 +65,12 @@ var app  = new Vue({
       console.log(data);
       this.$modal.hide('pay-modal');
       this.resetForm();
+    },
+    edit_pay(data) {
+      this.create_Flag = false,
+      this.edit_Index = this.payment.indexOf(data);
+      this.form = Object.assign({}, data);
+      this.$modal.show('pay-modal');
     },
     resetForm() {
       this.form.date = '';
