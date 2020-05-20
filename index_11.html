@@ -133,8 +133,8 @@
 
                 <button class="btn btn-primary" v-on:click="add_pay" v-if="create_Flag">追加</button>
                 <div v-else>
-                  <button class="btn btn-danger">削除</button>
-                  <button class="btn btn-success">更新</button>
+                  <button class="btn btn-danger" v-on:click="delete_pay">削除</button>
+                  <button class="btn btn-success" v-on:click="update_pay">更新</button>
                 </div>
 
               </div>

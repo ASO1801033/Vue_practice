@@ -56,6 +56,7 @@ var app  = new Vue({
   // ↑ローカルストレージの実装
   methods: {
     Modal_show(){
+      this.create_Flag = true;
       this.resetForm();
       this.$modal.show('pay-modal');
     },
@@ -71,6 +72,14 @@ var app  = new Vue({
       this.edit_Index = this.payment.indexOf(data);
       this.form = Object.assign({}, data);
       this.$modal.show('pay-modal');
+    },
+    update_pay() {
+      Object.assign(this.payment[this.edit_Index], this.form);
+      this.$modal.hide('pay-modal');
+    },
+    delete_pay() {
+      this.payment.splice(this.edit_Index, 1);
+      this.$modal.hide('pay-modal');
     },
     resetForm() {
       this.form.date = '';
