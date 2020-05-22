@@ -20,8 +20,8 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="align-middle text-center">日付</th>
-              <th class="align-middle text-center">収支</th>
+              <th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('date')">▼</button></th>
+              <th class="align-middle text-center">収支 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('in_ex')">▼</button></th>
               <th class="align-middle text-center">財布元</th>
               <th class="align-middle text-center">金額</th>
               <th class="align-middle text-center">分類</th>

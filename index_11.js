@@ -89,5 +89,24 @@ var app  = new Vue({
       this.form.category = '';
       this.form.memo = '';
     },
+    sort: function(action_type) {
+      switch (action_type) {
+        case 'date':
+          this.payment.sort(function(a,b){
+            if(a.date < b.date) return -1;
+            if(a.date > b.date) return 1;
+            return 0;
+          });
+          break;
+        case 'in_ex':
+          this.payment.sort(function(a,b){
+            if(a.in_ex < b.in_ex) return -1;
+            if(a.in_ex > b.in_ex) return 1;
+            return 0;
+          });
+          break;
+        default:
+      };
+    },
   },
 });
