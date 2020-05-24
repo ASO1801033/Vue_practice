@@ -37,6 +37,7 @@ var app  = new Vue({
     payment: [],
     edit_Index: -1,
     create_Flag: true,
+    sortOrder: 1
   },
   // ↓ローカルストレージの実装
   watch: {
@@ -89,7 +90,7 @@ var app  = new Vue({
       this.form.category = '';
       this.form.memo = '';
     },
-    sort: function(action_type) {
+    /*sort: function(action_type) { //sortしたらリセット出来なくなっている
       switch (action_type) {
         case 'date':
           this.payment.sort(function(a,b){
@@ -98,15 +99,19 @@ var app  = new Vue({
             return 0;
           });
           break;
-        case 'in_ex':
-          this.payment.sort(function(a,b){
-            if(a.in_ex < b.in_ex) return -1;
-            if(a.in_ex > b.in_ex) return 1;
-            return 0;
-          });
-          break;
         default:
       };
+    },*/
+    changeOrder(){
+       this.sortOrder = this.sortOrder > 0 ? -1 : 1;
+    },
+  },
+  computed: {
+    // 配列の要素順番を逆順にする
+    sortedItemsByAmount(){
+        return this.payment.sort((a, b) => {
+          return (a.date < b.date) ? -this.sortOrder : (a.date > b.date) ? this.sortOrder : 0;
+        });;
     },
   },
 });

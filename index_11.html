@@ -20,8 +20,9 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('date')">▼</button></th>
-              <th class="align-middle text-center">収支 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('in_ex')">▼</button></th>
+              <!--<th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('date')">▼<button class="button" @click="changeOrder">順番切り替え</button></button></th>-->
+              <th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="changeOrder">▼</button></th>
+              <th class="align-middle text-center">収支 <button type="button" class="btn btn-outline-dark btn-sm">▼</button></th>
               <th class="align-middle text-center">財布元</th>
               <th class="align-middle text-center">金額</th>
               <th class="align-middle text-center">分類</th>
@@ -30,7 +31,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="data in payment">
+            <!--<tr v-for="data in payment">-->
+            <tr v-for="data in sortedItemsByAmount" v-bind:key="data.date">
               <td class="align-middle text-center">{{ data.date }}</td>
               <td class="align-middle text-center">{{ data.in_ex }}</td>
               <td class="align-middle text-center">{{ data.wallet }}</td>
