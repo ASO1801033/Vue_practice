@@ -102,9 +102,13 @@ var app  = new Vue({
         default:
       };
     },*/
-    changeOrder(){
+    changeOrder() {
        this.sortOrder = this.sortOrder > 0 ? -1 : 1;
     },
+    reset: function() {
+      this.sort.key = '';
+      this.sort.isAsc = false;
+    }
   },
   computed: {
     // 配列の要素順番を逆順にする
