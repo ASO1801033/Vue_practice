@@ -5,6 +5,14 @@ var app  = new Vue({
   el: "#app",
   data: {
     title: '家計簿つけつけマン',
+    wallet_items: [
+      { id: 'all', value: -1, label: 'すべて' },
+      { id: 'money', value: 0, label: '現金' },
+      { id: 'card', value: 1, label: 'クレジットカード' },
+      { id: 'electronic', value: 2, label: '電子マネー/QRコード・バーコード' },
+      { id: 'deduct', value: 3, label: '引き落とし' },
+      { id: 'deposit', value: 4, label: '振り込み' },
+    ],
     form: {
       date: '',
       in_ex: '',
@@ -12,14 +20,6 @@ var app  = new Vue({
       price: '',
       category: '',
     },
-    wallet_items: [
-      //{ item: 'すべて', value: 'all' },
-      { item: '現金'/*, value: 'money'*/ },
-      { item: 'クレジットカード'/*, value: 'card'*/ },
-      { item: '電子マネー/QRコード・バーコード'/*, value: 'electronic'*/ },
-      { item: '引き落とし'/*, value: 'deduct'*/ },
-      { item: '振り込み'/*, value: 'deposit'*/ },
-    ],
     category_items: [
       //{ item: 'すべて' },
       { item: '食費' },
@@ -37,7 +37,8 @@ var app  = new Vue({
     payment: [],
     edit_Index: -1,
     create_Flag: true,
-    sortOrder: 1
+    //sortOrder: 1,
+    current: -1,
   },
   // ↓ローカルストレージの実装
   watch: {
@@ -93,7 +94,7 @@ var app  = new Vue({
     /*sort: function(action_type) { //sortしたらリセット出来なくなっている
       switch (action_type) {
         case 'date':
-          this.payment.sort(function(a,b){
+          this.item.sort(function(a,b){
             if(a.date < b.date) return -1;
             if(a.date > b.date) return 1;
             return 0;
@@ -102,20 +103,43 @@ var app  = new Vue({
         default:
       };
     },*/
+    /*
     changeOrder() {
        this.sortOrder = this.sortOrder > 0 ? -1 : 1;
     },
-    reset: function() {
-      this.sort.key = '';
-      this.sort.isAsc = false;
-    }
+    */
   },
+  /*
   computed: {
     // 配列の要素順番を逆順にする
     sortedItemsByAmount(){
-        return this.payment.sort((a, b) => {
-          return (a.date < b.date) ? -this.sortOrder : (a.date > b.date) ? this.sortOrder : 0;
-        });;
+      return this.item.sort((a, b) => {
+        return (a.date < b.date) ? -this.sortOrder : (a.date > b.date) ? this.sortOrder : 0;
+      });;
     },
+  },
+  */
+  computed: { //絞り込み処理
+    computedpayment: function() {
+      switch (this.current) {
+        case -1:
+          return this.payment;
+        case 0:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.payment.filter(e => e.wallet === '現金');
+        case 1:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.payment.filter(e => e.wallet === 'クレジットカード');
+        case 2:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.payment.filter(e => e.wallet === '電子マネー/QRコード・バーコード');
+        case 3:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.payment.filter(e => e.wallet === '引き落とし');
+        case 4:
+          //配列で条件に一致する要素を抜き出すにはfilterメソッドをつかう
+          return this.payment.filter(e => e.wallet === '振り込み');
+      }
+    }
   },
 });

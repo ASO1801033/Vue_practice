@@ -14,16 +14,21 @@
         <h3 class="text-center">{{ title }}</h3>
 
         <div class="text-right">
-          <button class="btn btn-primary mb-3 bg-primary" v-on:click="reset">リセット</button>
+          <!--<button class="btn btn-primary mb-3 bg-primary" v-on:click="reset">リセット</button>-->
           <button class="btn btn-primary mb-3 bg-primary" v-on:click="Modal_show">追加</button>
         </div>
+
+        <span v-for="selected in wallet_items" :key="selected.id">
+          <input type="radio" :id="selected.id" :value="selected.value" v-model="current">
+          <label :for="selected.id" class="mr-3">{{ selected.label }}</label>
+        </span>
 
         <table class="table">
           <thead>
             <tr>
               <!--<th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="sort('date')">▼<button class="button" @click="changeOrder">順番切り替え</button></button></th>-->
-              <th class="align-middle text-center">日付 <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="changeOrder">▼</button></th>
-              <th class="align-middle text-center">収支 <button type="button" class="btn btn-outline-dark btn-sm">▼</button></th>
+              <th class="align-middle text-center">日付<!-- <button type="button" class="btn btn-outline-dark btn-sm" v-on:click="changeOrder">▼</button>--></th>
+              <th class="align-middle text-center">収支<!-- <button type="button" class="btn btn-outline-dark btn-sm">▼</button>--></th>
               <th class="align-middle text-center">財布元</th>
               <th class="align-middle text-center">金額</th>
               <th class="align-middle text-center">分類</th>
@@ -33,7 +38,8 @@
           </thead>
           <tbody>
             <!--<tr v-for="data in payment">-->
-            <tr v-for="data in sortedItemsByAmount" v-bind:key="data.date">
+            <tr v-for="data in computedpayment">
+            <!--<tr v-for="data in sortedItemsByAmount" v-bind:key="data.date">-->
               <td class="align-middle text-center">{{ data.date }}</td>
               <td class="align-middle text-center">{{ data.in_ex }}</td>
               <td class="align-middle text-center">{{ data.wallet }}</td>
@@ -85,8 +91,8 @@
                         <option value="deduct">口座引き落とし</option>
                         <option value="deposit">振り込み</option>
                         -->
-                        <!--<option v-for="n in wallet_items.length - 1">{{ wallet_items[n].item }}</option>-->
-                        <option v-for="wallet in wallet_items">{{ wallet.item }}</option>
+                        <option v-for="no in wallet_items.length - 1">{{ wallet_items[no].label }}</option>
+                        <!--<option v-for="wallet in wallet_items">{{ wallet.item }}</option>-->
                       </select>
                     </div>
                   </div>
